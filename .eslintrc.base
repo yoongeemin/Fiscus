@@ -1,0 +1,31 @@
+{
+    "extends": ["airbnb"],
+    
+    "env": {
+        "es6": true,
+    },
+
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+
+    "rules": {
+        "no-console": 0,
+        "no-undef": 0,
+        "no-unused-vars": 1,
+        "quotes": [2, "double", "avoid-escape"],
+        "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+        "indent": 0,
+        "func-names": 0,
+        "space-before-function-paren": 0,
+        "spaced-comment": 0,
+        "no-param-reassign": 0,
+        "arrow-body-style": [2, "always"],
+        "max-len": 0,
+        "no-script-url": 0,
+        "new-cap": 0,
+        "no-trailing-spaces": 1,
+        "quote-props": [2, "consistent"],
+    },
+}

@@ -1,0 +1,14 @@
+@import '../constants';
+
+#authentication {
+    padding-top: $authentication-padding;
+}
+
+.btn-signup {
+    width: 40%;
+    padding: 15px 0;
+}
+
+.btn-email-signup {
+    background-color: $col-gray-4;
+}

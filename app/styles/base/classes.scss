@@ -1,0 +1,142 @@
+.display-flex {
+    display: flex;
+}
+
+.flex-justify-space {
+    justify-content: space-between;
+}
+
+.display-table {
+    display: table;
+}
+
+.display-table-cell {
+    display: table-cell;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.margin-right {
+    margin-right: 10px;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.padding-left {
+    padding-left: 10px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.border-black {
+    border: 1px solid black;
+}
+
+.hidden { display: none; }
+
+.absolute-center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    top: auto;
+}
+
+.bg-color-black {
+    background-color: black;
+}
+
+.box-shadow {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    -o-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.fill-height {
+    height: 100%;
+}
+
+.fill-width {
+    width: 100%;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+}
+.on-top {
+    z-index: 1000;
+}
+
+#overlay {
+    display: none;
+
+    position: absolute;
+
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1001;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+
+/* Forms */
+.two-form-groups {
+    .form-group {
+        width: 48%;
+    }
+}
+
+/* Color Palette */
+.text-col-black, .text-col-black:focus, .text-col-black:hover {
+    color: black;
+}

@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-before: 0;
+    -webkit-padding-after: 0;
+    -webkit-padding-start: 0;
+    -webkit-padding-end: 0;
+}
+
+html, body, #main, #app {
+    height: 100%;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow: auto;
+}
+
+a, a:hover, a:focus, a:active, a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+table {
+    border-spacing: 0;
+    border: none;
+}
+
+input {
+    outline: none;
+    border: none;
+    color: black;
+}
+
+input::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input::-ms-clear {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}

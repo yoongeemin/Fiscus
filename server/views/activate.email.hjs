@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>You are receiving this email because you created an account on Fiscus</p>
+        <p>Click the following link to activate your account:</p>
+        <p><a href="{{protocol}}://{{domain}}/{{uid}}/{{token}}">Activate</a></p>
+        <p>Thanks for using Fiscus</p>
+        <p>The Fiscus Team</p>
+    </body>
+</html>

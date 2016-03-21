@@ -1,0 +1,85 @@
+ul, menu, dir {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    content: none;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    color: white
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding: 0;
+}
+
+.glyphicon {
+    color: white;
+    font-size: 1.5vw;
+    vertical-align: top;
+}
+
+.glyphicon.glyphicon-info-sign {
+    margin-right: 0.2em;
+}
+
+.glyphicon.glyphicon-triangle-top {
+    color: green
+}
+
+.glyphicon.glyphicon-triangle-bottom {
+    color: red
+}
+
+.btn.dropdown-toggle {
+    background-image: none;
+    background-color: black;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: black;
+    color: white;
+    min-width: 100%;
+    border-radius: 0;
+
+    li>a, li>a:hover, li>a:focus {
+        background-image: none;
+        background-color: black;
+        color: white;
+    }
+}
+
+.separator {
+    height: 1px;
+    margin: 3px 0;
+    overflow: hidden;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: #505050;
+}
+
+.modal-content {
+    z-index: 1002;
+    background-color: black;
+    border-radius: 0;
+
+    .close-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Forms */
+.form-control {
+    border: none;
+}
+

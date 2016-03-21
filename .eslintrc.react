@@ -1,0 +1,16 @@
+{
+	"extends": ["./.eslintrc.base", "plugin:react/recommended"],
+	
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+        }
+    },
+
+    "plugins": ["react"],
+
+    "rules": {
+        "react/display-name": 0,
+        "react/prefer-stateless-function": 0,
+    },
+}

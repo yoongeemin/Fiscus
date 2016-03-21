@@ -1,0 +1,15 @@
+@import '../constants';
+
+#navbar {
+    #navbar-main {
+        background-color: $col-primary;
+        height: $navbar-height;
+        padding: 8px;
+    }
+
+    #ticker {
+        .ticker-price {
+            color: $col-gray-2;
+        }
+    }
+}
