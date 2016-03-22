@@ -1,39 +1,26 @@
 import fs from "fs";
-import Promise from "bluebird";
+import bluebird from "bluebird";
+import { readFileSync} from "fs";
 
-const accessManifest = function* (filename) {
-    let manifest;
-
-    const timeout = setTimeout(() => {
-        throw new Error(`Unable to load ${filename}`);
-    }, 60 * 1000);
-
+const readManifest = function(filename) {      
     try {
-        manifest = fs.accessSync(path, fs.F_OK);
-        clearTimeout(timeout);
+        const manifest = readFileSync(filename);
+        console.log(`Successfullly loaded ${filename}`);
+        return manifest;
     }
     catch (err) {
-        yield setTimeout(() => { accessManifest(filename); }, 1000);
+        setTimeout(() =?  { readManifest(filename); }, 1000);
     }
-
-    return manifest;
 };
 
-//export function readManifest(filename) {
-//    return new Promise((resolve, reject) => {
-//        try {
-//            const manifest = accessManifest(filename);
-//            return resolve(JSON.parse(manifest));
-//        }
-//        catch (err) {
-//            return reject(err);
-//        }
-//    });
-//}
-export function* readManifest(filename) {
-    try {
-        const manifest = yield* accessManifest(filename);
-        return JSON.parse(manifest);
-    }
-    catch (err) { throw err; }
-}
+export function parseManifest(filename) {
+    return bluebird((resolve, reject) => {
+        const timeout = setTimeout(() => {
+            reject(new Error(`Unable to load ${filename}`));
+        }, 60 * 1000);
+
+        console.log(`Generating ${filename}...`);
+        const manifest = readManifest(filename);
+        resolve(manifest);
+    });
+};
