@@ -16,8 +16,8 @@ export default function(app) {
     //router.get(`${API_PREFIX}/activate/:uid/:token`, authenticationControllers.activate);
     router.post(`${API_PREFIX}/signUp`, authenticationControllers.signUp);
 
-    router.get("*", function*() {
-        const manifest = yield* readManifest(path.resolve("public", "app.manifest.json"));
+    router.get("*", function* () {
+        const manifest = yield parseManifest(path.resolve("public", "app.manifest.json"));
         this.body = yield this.render("app.hjs", {
             js: manifest.app.js,
             css: manifest.app.css,
