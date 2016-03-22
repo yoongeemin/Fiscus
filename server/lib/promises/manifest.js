@@ -21,6 +21,6 @@ export function parseManifest(filename) {
 
         console.log(`Generating ${filename}...`);
         const manifest = readManifest(filename);
-        resolve(manifest);
+        resolve(JSON.parse(manifest));
     });
 };
