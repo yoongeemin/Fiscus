@@ -37,7 +37,7 @@ class SignIn extends React.Component {
                         <tr>
                             <td></td>
                             <td>
-                                <a className="text-col-black" href="javascript:void(0);">Forgot your password?</a>
+                                <a className="font-size-sm" href="javascript:void(0);">Forgot your password?</a>
                             </td>
                         </tr>
                     </tbody>

@@ -1,18 +1,25 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const AssetsPlugin = require("assets-webpack-plugin");
 const Configurator = require("webpack-config");
 
 module.exports = new Configurator().merge({
-    entry: [path.resolve(__dirname, "..", "..", "app", "client.jsx")],
+    entry: {
+        app: [path.resolve(__dirname, "..", "..", "app", "client.jsx")],
+    },
 
     output: {
-        filename: "app.js",
         publicPath: "/assets/",
         path: "/",
     },
 
     plugins: [
-        new ExtractTextPlugin("app.css"),
+        new ExtractTextPlugin("[name].[hash].css"),
+        new AssetsPlugin({
+            filename: "app.manifest.json",
+            path: path.resolve(__dirname, "..", "..", "public"),
+            fullPath: false,
+        }),
     ],
 
     module: {

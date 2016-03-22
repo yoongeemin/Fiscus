@@ -7,10 +7,12 @@ module.exports = new Configurator()
 .extend(path.resolve(__dirname, "..", "dev"))
 .merge({
     // Add webpack hot reloading
-    entry: [
-        "webpack-hot-middleware/client",
-        "webpack/hot/dev-server",
-    ],
+    entry: {
+        app: [
+            "webpack-hot-middleware/client",
+            "webpack/hot/dev-server",
+        ],
+    },
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

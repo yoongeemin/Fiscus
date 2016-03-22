@@ -5,6 +5,10 @@ const Configurator = require("webpack-config");
 const nodePath = path.resolve(__dirname, "..", "node_modules");
 
 module.exports = new Configurator().merge({
+    output: {
+        filename: "[name].[hash].js",
+    },
+
     resolve: {
         extensions: ["", ".js", ".jsx"],
 

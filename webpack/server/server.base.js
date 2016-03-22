@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const AssetsPlugin = require("assets-webpack-plugin");
 const Configurator = require("webpack-config");
 
 // Resolve binary dependency in node modules
@@ -20,12 +21,21 @@ module.exports = new Configurator().merge({
         __filename: true,
     },
 
-    entry: [path.resolve(__dirname, "..", "..", "server", "server.js")],
+    entry: {
+        server: [path.resolve(__dirname, "..", "..", "server", "server.js")],
+    },
 
     output: {
-        filename: "server.js",
         path: path.resolve(__dirname, "..", "..", "public"),
     },
+
+    plugins: [
+        new AssetsPlugin({
+            filename: "server.manifest.json",
+            path: path.resolve(__dirname, "..", "..", "public"),
+            fullPath: false,
+        }),
+    ],
 
     externals: nodeModules,
 });

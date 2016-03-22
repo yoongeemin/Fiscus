@@ -1,4 +1,8 @@
 import Router from "koa-router";
+import { readFileSync } from "fs";
+import path from "path";
+import Promise from "bluebird";
+import { readManifest } from "../lib/promises/manifest";
 import * as authenticationControllers from "../controllers/authentication";
 
 const API_PREFIX = "/api";
@@ -13,7 +17,11 @@ export default function(app) {
     router.post(`${API_PREFIX}/signUp`, authenticationControllers.signUp);
 
     router.get("*", function*() {
-        this.body = yield this.render("app.hjs", { });
+        const manifest = yield* readManifest(path.resolve("public", "app.manifest.json"));
+        this.body = yield this.render("app.hjs", {
+            js: manifest.app.js,
+            css: manifest.app.css,
+        });
     });
 
     app.use(router.routes());
