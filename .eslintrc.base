@@ -27,5 +27,8 @@
         "new-cap": 0,
         "no-trailing-spaces": 1,
         "quote-props": [2, "consistent"],
+        "consistent-return": 0,
+        "prefer-template": 1,
+        "no-multiple-empty-lines": 1,
     },
 }

@@ -1,8 +1,6 @@
 import Router from "koa-router";
-import { readFileSync } from "fs";
 import path from "path";
-import Promise from "bluebird";
-import { readManifest } from "../lib/promises/manifest";
+import { parseManifest } from "../lib/promises/manifest";
 import * as authenticationControllers from "../controllers/authentication";
 
 const API_PREFIX = "/api";
