@@ -1,26 +1,27 @@
-import fs from "fs";
 import bluebird from "bluebird";
-import { readFileSync} from "fs";
+import { readFile } from "fs";
 
-const readManifest = function(filename) {      
-    try {
-        const manifest = readFileSync(filename);
-        console.log(`Successfullly loaded ${filename}`);
-        return manifest;
-    }
-    catch (err) {
-        setTimeout(() =?  { readManifest(filename); }, 1000);
-    }
+const readManifest = function(filename) {
+    return bluebird.promisify(readFile)(filename)
+        .then((manifest) => { return manifest; })
+        .catch(() => {
+            return bluebird.delay(1000).then(() => {
+                return readManifest(filename);}
+            );
+        });
 };
 
 export function parseManifest(filename) {
-    return bluebird((resolve, reject) => {
-        const timeout = setTimeout(() => {
-            reject(new Error(`Unable to load ${filename}`));
-        }, 60 * 1000);
-
-        console.log(`Generating ${filename}...`);
-        const manifest = readManifest(filename);
-        resolve(JSON.parse(manifest));
+    const timeout = bluebird.delay(60 * 1000).then(() => {
+        throw new Error(`Unable to load ${filename}`);
     });
+
+    console.log(`Waiting for ${filename} to generate..`);
+    return readManifest(filename)
+        .then((manifest) => {
+            timeout.cancel();
+            console.log(`Successfullly loaded ${filename}`);
+            return JSON.parse(manifest);
+        });
 };
+
