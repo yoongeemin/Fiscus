@@ -1,5 +1,6 @@
 import bluebird from "bluebird";
 import { readFile } from "fs";
+import { logger } from "../logger";
 
 const readManifest = function(filename) {
     return bluebird.promisify(readFile)(filename)
@@ -12,16 +13,16 @@ const readManifest = function(filename) {
 };
 
 export function parseManifest(filename) {
-    const timeout = bluebird.delay(60 * 1000).then(() => {
+    const timeout = setTimeout(() => {
+        logger.error(`Unable to load ${filename}`);
         throw new Error(`Unable to load ${filename}`);
-    });
+    }, 30 * 1000);
 
-    console.log(`Waiting for ${filename} to generate..`);
+    logger.info(`Waiting for ${filename} to generate..`);
     return readManifest(filename)
         .then((manifest) => {
-            timeout.cancel();
-            console.log(`Successfullly loaded ${filename}`);
+            clearTimeout(timeout);
+            logger.info(`Successfullly loaded ${filename}`);
             return JSON.parse(manifest);
         });
-};
-
+}
