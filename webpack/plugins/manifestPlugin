@@ -1,6 +1,13 @@
 const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
+const url = require("url");
+
+function extractExension(asset) {
+	return path.extname(
+		url.parse(asset).pathname
+	);
+}
 
 function ManifestPlugin(options) {
 	this.options = _.merge({}, {
