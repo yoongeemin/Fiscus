@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const Configurator = require("webpack-config");
+const ManifestPlugin = require("./plugins/manifestPlugin");
 
 const nodePath = path.resolve(__dirname, "..", "node_modules");
 
@@ -24,9 +25,12 @@ module.exports = new Configurator().merge({
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.ProvidePlugin({
-            jQuery: "jquery",
             $: "jquery",
             _: "lodash",
+            LOGGER: path.resolve(__dirname, "..", "logger.js"),
+        }),
+        new ManifestPlugin({
+            path: path.resolve(__dirname, "..", "public"),
         }),
     ],
 

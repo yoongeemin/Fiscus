@@ -1,4 +1,3 @@
-import _ from "lodash";
 import * as appActionCreator from "./appActionCreator";
 import * as userActionCreator from "./userActionCreator";
 

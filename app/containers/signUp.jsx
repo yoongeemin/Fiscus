@@ -11,8 +11,8 @@ class SignUp extends React.Component {
 
         this.handleSubmit = () => {
             this.props.dispatch(signUp({
-                first_name: this.refs.first_name.value,
-                last_name: this.refs.last_name.value,
+                firstname: this.refs.firstname.value,
+                lastname: this.refs.lastname.value,
                 email: this.refs.email.value,
                 mobile: this.refs.mobile.value,
                 password: this.refs.password.value,
@@ -46,7 +46,7 @@ class SignUp extends React.Component {
 
                 <div className="form-group">
                     <label className="sr-only" htmlFor="password"></label>
-                    <input type="text" className="form-control" id="password" ref="password" placeholder="Password" />
+                    <input type="password" className="form-control" id="password" ref="password" placeholder="Password" />
                 </div>
 
                 <div className="display-flex flex-justify-space two-form-groups">

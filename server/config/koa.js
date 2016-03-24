@@ -20,7 +20,6 @@ export default function(app, passport) {
     app.use(responeTime());
     app.use(compress());
     app.use(bodyParser());
-    app.use(csrf());
     app.use(cors());
 
     app.use(favicon(path.resolve(config.root, "public/img/favicon.png")));
@@ -44,6 +43,8 @@ export default function(app, passport) {
             url: config.db,
         }),
     }));
+    csrf(app);
+    app.use(csrf.middleware);
 
     app.use(passport.initialize());
     app.use(passport.session());
@@ -57,18 +58,18 @@ export default function(app, passport) {
 
         app.use(devMiddleware(compiler, {
             publicPath: webpackConfig.output.publicPath,
-            noInfo: true,
+            quiet: true,
             watchOptions: {
-                aggregateTimeout: 2000,
+                aggregateTimeout: 1000,
             },
         }));
 
         app.use(hotMiddleware(compiler, {
             path: "/__webpack_hmr",
-            noInfo: true,
+            quiet: true,
             reload: true,
             heartbeat: 10 * 1000,
-            timeout: 20000,
+            timeout: 20 * 1000,
         }));
     }
 }

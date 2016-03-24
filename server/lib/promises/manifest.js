@@ -1,28 +1,32 @@
 import bluebird from "bluebird";
 import { readFile } from "fs";
-import { logger } from "../logger";
 
-const readManifest = function(filename) {
+const parseManifest = function(filename, chunkname) {
     return bluebird.promisify(readFile)(filename)
-        .then((manifest) => { return manifest; })
-        .catch(() => {
+        .then((manifest) => {
+            const chunk = JSON.parse(manifest)[chunkname];
+            if (chunk) { return chunk; }
             return bluebird.delay(1000).then(() => {
-                return readManifest(filename);}
-            );
+                return parseManifest(filename, chunkname);
+            });
+        })
+        .catch(() => {
+            LOGGER.error(`Unable to load ${filename}`);
+            throw new Error(`Unable to load ${filename}`);
         });
 };
 
-export function parseManifest(filename) {
+export function loadChunk(filename, chunkname) {
     const timeout = setTimeout(() => {
-        logger.error(`Unable to load ${filename}`);
+        LOGGER.error(`Unable to load ${filename}`);
         throw new Error(`Unable to load ${filename}`);
-    }, 30 * 1000);
+    }, 60 * 1000);
 
-    logger.info(`Waiting for ${filename} to generate..`);
-    return readManifest(filename)
-        .then((manifest) => {
+    LOGGER.info(`Loading ${filename}`);
+    return parseManifest(filename, chunkname)
+        .then((chunk) => {
             clearTimeout(timeout);
-            logger.info(`Successfullly loaded ${filename}`);
-            return JSON.parse(manifest);
+            LOGGER.info(`Successfullly loaded ${filename}`);
+            return chunk;
         });
 }

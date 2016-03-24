@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/yoongeemin/Express_Fiscus#readme",
   "dependencies": {
-    "assets-webpack-plugin": "^3.4.0",
     "babel-core": "^6.6.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.5.2",
@@ -68,6 +67,7 @@
     "koa-webpack-hot-middleware": "^1.0.3",
     "lodash": "^4.6.1",
     "method-override": "^2.3.5",
+    "moment": "^2.12.0",
     "mongoose": "^4.4.6",
     "morgan": "^1.7.0",
     "node-sass": "^3.4.2",
@@ -89,7 +89,9 @@
     "webpack-config": "^4.0.0",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.9.1"
+    "webpack-hot-middleware": "^2.9.1",
+    "winston": "^2.2.0",
+    "winston-daily-rotate-file": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",

@@ -28,7 +28,7 @@ class SignIn extends React.Component {
                             </td>
                             <td>
                                 <label className="sr-only" htmlFor="password"></label>
-                                <input type="text" className="input-default border-black" id="password" ref="password" placeholder="Password" />
+                                <input type="password" className="input-default border-black" id="password" ref="password" placeholder="Password" />
                             </td>
                             <td>
                                 <button type="submit" className="btn btn-default btn-xs" onClick={this.handleSubmit}>Sign In</button>

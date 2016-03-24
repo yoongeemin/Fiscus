@@ -1,4 +1,3 @@
-import _ from "lodash";
 import path from "path";
 import development from "./env/development";
 import qa from "./env/qa";

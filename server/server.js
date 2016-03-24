@@ -13,7 +13,7 @@ bootstrapRoutes(app);
 
 function listen() {
     app.listen(process.env.PORT);
-    console.log(`Server starting on port: ${process.env.PORT}`);
+    LOGGER.info(`Server starting on port: ${process.env.PORT}`);
 }
 
 function connect() {
@@ -22,5 +22,5 @@ function connect() {
 }
 
 connect()
-    .on("error", console.error)
+    .on("error", () => { LOGGER.error(`Failed to connect to mongodb server: ${config.db}`); })
     .on("open", listen);

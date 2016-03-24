@@ -1,6 +1,6 @@
 import Router from "koa-router";
 import path from "path";
-import { parseManifest } from "../lib/promises/manifest";
+import { loadChunk } from "../lib/promises/manifest";
 import * as authenticationControllers from "../controllers/authentication";
 
 const API_PREFIX = "/api";
@@ -15,10 +15,10 @@ export default function(app) {
     router.post(`${API_PREFIX}/signUp`, authenticationControllers.signUp);
 
     router.get("*", function* () {
-        const manifest = yield parseManifest(path.resolve("public", "app.manifest.json"));
+        const chunk = yield loadChunk(path.resolve("public", "manifest.json"), "app");
         this.body = yield this.render("app.hjs", {
-            js: manifest.app.js,
-            css: manifest.app.css,
+            js: chunk.js,
+            css: chunk.css,
         });
     });
 
