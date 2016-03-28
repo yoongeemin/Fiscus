@@ -1,13 +1,19 @@
+"use strict";
 const path = require("path");
 const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Configurator = require("webpack-config");
-const ManifestPlugin = require("./plugins/manifestPlugin");
 
 const nodePath = path.resolve(__dirname, "..", "node_modules");
 
 module.exports = new Configurator().merge({
+    entry: {
+        app: [path.resolve(__dirname, "..", "app", "client.jsx")],
+    },
+
     output: {
-        filename: "[name].[hash].js",
+        path: path.resolve(__dirname, "..", "public", "assets"),
+        publicPath: "/assets/",
     },
 
     resolve: {
@@ -27,10 +33,10 @@ module.exports = new Configurator().merge({
         new webpack.ProvidePlugin({
             $: "jquery",
             _: "lodash",
-            LOGGER: path.resolve(__dirname, "..", "logger.js"),
         }),
-        new ManifestPlugin({
-            path: path.resolve(__dirname, "..", "public"),
+        new webpack.DefinePlugin({
+            HOSTNAME: JSON.stringify(process.env.HOSTNAME),
+            PORT: JSON.stringify(process.env.PORT),
         }),
     ],
 
@@ -41,6 +47,19 @@ module.exports = new Configurator().merge({
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
+            {
+                test: /\.(css|scss)$/,
+                loader: ExtractTextPlugin.extract("style", "css!sass"),
+            },
+            {
+                test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
+                loader: "url-loader?limit=8192",
+            },
+            {
+                include: /\.json$/,
+                loaders: ["json-loader"],
+            },
+
         ],
     },
 });

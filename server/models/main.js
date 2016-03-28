@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+"use strict";
+const mongoose = require("mongoose");
 
 const AccountSchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
@@ -35,9 +36,10 @@ const SynonymCategorySchema = new mongoose.Schema({
     },
 });
 
-export { AccountSchema };
-export const Account = mongoose.model("Account", AccountSchema);
-export const Transaction = mongoose.model("Transaction", TransactionSchema);
-export const RootCategory = mongoose.model("RootCategory", RootCategorySchema);
-export const SynonymCategory = mongoose.model("SynonymCategory", SynonymCategorySchema);
-
+module.exports = {
+    AccountSchema,
+    Account: mongoose.model("Account", AccountSchema),
+    Transaction: mongoose.model("Transaction", TransactionSchema),
+    RootCategory: mongoose.model("RootCategory", RootCategorySchema),
+    SynonymCategory: mongoose.model("SynonymCategory", SynonymCategorySchema),
+};

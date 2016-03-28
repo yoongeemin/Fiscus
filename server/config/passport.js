@@ -1,7 +1,8 @@
-import local from "./passport/local";
-import User from "../models/user";
+"use strict";
+const local = require("./passport/local");
+const User = require("../models/user");
 
-export default function(app, passport) {
+module.exports = function(app, passport) {
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
@@ -13,4 +14,4 @@ export default function(app, passport) {
     });
 
     passport.use(local);
-}
+};

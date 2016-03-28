@@ -11,7 +11,8 @@ class NavBar extends React.Component {
         const authenticated = !this.props.profile.isEmpty();
 
         const navbarComponents = authenticated
-            ? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
+            //? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
+            ? null
             : <SignIn />;
 
         const tickers = authenticated
@@ -36,14 +37,11 @@ NavBar.propTypes = {
     quotes: React.PropTypes.object.isRequired,
 };
 
-//function mapStateToProps(state) {
-//    return state;
-//    //return {
-//        // quotes: state.quoteReducer.quotes,
-//        // profile: state.fiscusReducer.profile,
-//        // apps: state.fiscusReducer.apps,
-//        // activeApp: state.fiscusReducer.activeApp
-//    //};
-//}
+function mapStateToProps(state) {
+    return {
+         quotes: state.quoteReducer.quotes,
+         profile: state.userReducer.profile,
+    };
+}
 
 export default connect()(NavBar);

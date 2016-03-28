@@ -16,12 +16,8 @@ import createLogger from "redux-logger";
 //    return [dateString, timeString, secondString];
 //}
 
-// export function setUpCSRFToken() {
-// 	var csrfToken = $.cookie('csrftoken');
-// 	$.ajaxSetup({
-// 		headers: { "X-CSRFToken": csrfToken }
-// 	});
-// }
+
+
 
 export function configureStore(reducer) {
     const middlewares = [thunk];

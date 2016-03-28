@@ -1,32 +1,31 @@
-import bluebird from "bluebird";
-import { readFile } from "fs";
+"use strict";
+const bluebird = require("bluebird");
+const readFile = require("fs").readFile;
+const LOGGER = require("../logger");
 
-const parseManifest = function(filename, chunkname) {
+const openManifest = function(filename) {
     return bluebird.promisify(readFile)(filename)
-        .then((manifest) => {
-            const chunk = JSON.parse(manifest)[chunkname];
-            if (chunk) { return chunk; }
-            return bluebird.delay(1000).then(() => {
-                return parseManifest(filename, chunkname);
-            });
-        })
+        .then((manifest) => { return manifest; })
         .catch(() => {
-            LOGGER.error(`Unable to load ${filename}`);
-            throw new Error(`Unable to load ${filename}`);
+            return bluebird.delay(1000).then(() => {
+                return openManifest(filename);
+            });
         });
 };
 
-export function loadChunk(filename, chunkname) {
-    const timeout = setTimeout(() => {
-        LOGGER.error(`Unable to load ${filename}`);
-        throw new Error(`Unable to load ${filename}`);
-    }, 60 * 1000);
+module.exports = {
+    loadManifest: function(filename) {
+        const timeout = setTimeout(() => {
+            LOGGER.error(`Unable to load ${filename}`);
+            throw new Error(`Unable to load ${filename}`);
+        }, 60 * 1000);
 
-    LOGGER.info(`Loading ${filename}`);
-    return parseManifest(filename, chunkname)
-        .then((chunk) => {
-            clearTimeout(timeout);
-            LOGGER.info(`Successfullly loaded ${filename}`);
-            return chunk;
-        });
-}
+        LOGGER.info(`Loading ${filename}`);
+        return openManifest(filename)
+            .then((manifest) => {
+                clearTimeout(timeout);
+                LOGGER.info(`Successfullly loaded ${filename}`);
+                return JSON.parse(manifest);
+            });
+    },
+};

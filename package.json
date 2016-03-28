@@ -22,17 +22,19 @@
   },
   "homepage": "https://github.com/yoongeemin/Express_Fiscus#readme",
   "dependencies": {
+    "axios": "^0.9.1",
     "babel-core": "^6.6.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",
     "classnames": "^2.2.3",
     "co-views": "^2.1.0",
+    "composition": "^2.3.0",
     "compression": "^1.6.1",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
@@ -72,6 +74,7 @@
     "morgan": "^1.7.0",
     "node-sass": "^3.4.2",
     "nodemailer": "^2.3.0",
+    "nodemailer-smtp-transport": "^2.4.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "react": "^0.14.7",
@@ -94,6 +97,7 @@
     "winston-daily-rotate-file": "^1.0.1"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.4.0",
     "babel-eslint": "^5.0.0",
     "babel-preset-react-hmre": "^1.1.0",
     "eslint": "^2.3.0",
@@ -101,6 +105,7 @@
     "eslint-loader": "^1.3.0",
     "eslint-plugin-react": "^4.2.1",
     "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
     "gulp-nodemon": "^2.0.6"
   }
 }

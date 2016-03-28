@@ -1,11 +1,13 @@
-import path from "path";
-import development from "./env/development";
-import qa from "./env/qa";
-import production from "./env/production";
+"use strict";
+const _ = require("lodash");
+const path = require("path");
+const LOGGER = require("../lib/logger");
 
 const defaults = {
     root: path.resolve(__dirname, "..", ".."),
     sessionSecret: ["shhh", "this is a secret"],
+    smtpServer: "smtp.gmail.com",
+    smtpPort: 587,
     smtpUser: "yoongeemin@gmail.com",
     smtpPassword: "jywzaiwblxbqfvug",
 };
@@ -13,17 +15,18 @@ const defaults = {
 let config;
 switch (process.env.NODE_ENV) {
     case "development":
-        config = development;
+        config = require("./env/development");
         break;
     case "qa":
-        config = qa;
+        config = require("./env/qa");
         break;
     case "production":
-        config = production;
+        config = require("./env/production");
         break;
     default:
+        LOGGER.error(`NODE_ENV: ${process.env.NODE_ENV} is invalid`);
         break;
 }
 
-export default _.extend(defaults, config);
+module.exports = _.extend(defaults, config);
 

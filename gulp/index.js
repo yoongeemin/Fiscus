@@ -1,6 +1,7 @@
 module.exports = {
-    build: require("./build"),
     clean: require("./clean"),
-    rundev: require("./rundev"),
+    build: require("./build"),
+    lint: require("./lint"),
+    nodemon: require("./nodemon"),
     watch: require("./watch"),
 };

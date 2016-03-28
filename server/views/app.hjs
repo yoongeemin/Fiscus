@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Fiscus</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="{{csrf}}" name="csrf" />
+
+        <title>Fiscus</title>
         <link rel="stylesheet" href="/assets/{{css}}" />
     </head>
 

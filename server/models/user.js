@@ -1,7 +1,8 @@
-import co from "co";
-import crypt from "../lib/promises/crypt";
-import mongoose from "mongoose";
-import { AccountSchema } from "./main";
+"use strict";
+const bluebird = require("bluebird");
+const crypt = require("../lib/promises/crypt");
+const mongoose = require("mongoose");
+const AccountSchema = require("./main").AccountSchema;
 
 const SALT_ROUNDS = 5;
 
@@ -26,21 +27,20 @@ const UserSchema = new mongoose.Schema({
     },
     token: String,
     tokenExpiration: Date,
-    profile: {
-        firstName: {
-            type: String,
-            required: true,
-            lowercase: true,
-        },
-        lastName: {
-            type: String,
-            required: true,
-            lowercase: true,
-        },
-        accounts: [AccountSchema],
-        preference: {
 
-        },
+    firstName: {
+        type: String,
+        required: true,
+        lowercase: true,
+    },
+    lastName: {
+        type: String,
+        required: true,
+        lowercase: true,
+    },
+    accounts: [AccountSchema],
+    preference: {
+
     },
 });
 
@@ -53,7 +53,7 @@ UserSchema.pre("save", function(done) {
         done();
     }
 
-    co(function* () {
+    bluebird.coroutine(function* () {
         try {
             const salt = yield crypt.genSalt(SALT_ROUNDS);
             const hash = yield crypt.hash(user.password, salt);
@@ -63,7 +63,7 @@ UserSchema.pre("save", function(done) {
         catch (err) {
             done(err);
         }
-    }).then(done);
+    })().then(done);
 });
 
 UserSchema.methods = {
@@ -72,4 +72,4 @@ UserSchema.methods = {
     },
 };
 
-export default mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

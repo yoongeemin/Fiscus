@@ -1,26 +1,32 @@
-import nodemailer from "nodemailer";
-import bluebird from "bluebird";
+"use strict";
+const nodemailer = require("nodemailer");
+const smtpTransport = require("nodemailer-smtp-transport");
+const bluebird = require("bluebird");
 
-export function sendEmail(user, password, to, subject, html) {
-    return new bluebird((resolve, reject) => {
-        const smtpTransport = nodemailer.createTransport("SMTP", {
-            service: "Gmail",
-            auth: {
-                user,
-                password,
-            },
-        });
+module.exports = {
+    sendEmail: function(host, port, user, pass, to, subject, html) {
+        return new bluebird((resolve, reject) => {
+            const transport = nodemailer.createTransport(smtpTransport({
+                host,
+                port,
+                auth: {
+                    user,
+                    pass,
+                },
+                secureConnection: false,
+            }));
 
-        smtpTransport.sendMail({
-            from: user,
-            to,
-            subject,
-            html,
-        }, (err, info) => {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(info.response);
+            transport.sendMail({
+                from: user,
+                to,
+                subject,
+                html,
+            }, (err, info) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(info.response);
+            });
         });
-    });
-}
+    },
+};

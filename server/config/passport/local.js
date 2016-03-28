@@ -1,6 +1,7 @@
-import { Strategy as LocalStrategy } from "passport-local";
-import User from "../../models/user";
-import co from "co";
+"use strict";
+const bluebird = require("bluebird");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("../../models/user");
 
 function* authenticateUser(user, password, done) {
     const match = yield* user.authenticate(password);
@@ -9,7 +10,7 @@ function* authenticateUser(user, password, done) {
 }
 
 function signIn(signin, password, done) {
-    co(function* () {
+    bluebird.coroutine(function* () {
         try {
             // Find user by email
             const userByEmail = yield User.findOne({ email: signin }).exec();
@@ -21,7 +22,7 @@ function signIn(signin, password, done) {
             done(null, false, { message: "Invalid user or password" });
         }
         catch (err) { done(err); }
-    });
+    })().then(done);
 }
 
-export default new LocalStrategy({ usernameField: "signin" }, signIn);
+module.exports = new LocalStrategy({ usernameField: "signin" }, signIn);

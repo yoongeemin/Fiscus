@@ -1,10 +1,12 @@
-import koa from "koa";
-import mongoose from "mongoose";
-import passport from "passport";
-import bootstrapPassport from "./config/passport";
-import bootstrapKoa from "./config/koa";
-import bootstrapRoutes from "./config/routes";
-import config from "./config/config";
+"use strict";
+const koa = require("koa");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const bootstrapPassport = require("./config/passport");
+const bootstrapKoa = require("./config/koa");
+const bootstrapRoutes = require("./config/routes");
+const config = require("./config/config");
+const LOGGER = require("./lib/logger");
 
 const app = koa();
 bootstrapPassport(app, passport);
@@ -21,6 +23,10 @@ function connect() {
     return mongoose.connection;
 }
 
-connect()
-    .on("error", () => { LOGGER.error(`Failed to connect to mongodb server: ${config.db}`); })
-    .on("open", listen);
+if (!module.parent) {
+    connect()
+        .on("error", () => {
+            LOGGER.error(`Failed to connect to mongodb server: ${config.db}`);
+        })
+        .on("open", listen);
+}

@@ -1,9 +1,26 @@
 const gulp = require("gulp");
+const path = require("path");
 const tasks = require("./gulp/index");
 
 gulp.task("clean", tasks.clean);
 
-gulp.task("build:server:dev", ["clean"], tasks.build(require("./webpack/server/server.dev")));
-gulp.task("build:server:prod", ["clean"], tasks.build(require("./webpack/server/server.prod")));
+gulp.task("build", ["clean"], tasks.build(require("./webpack/dev")));
 
-gulp.task("run:dev", ["build:server:dev"], tasks.rundev);
+gulp.task("lint:server", tasks.lint(
+    [
+        path.resolve(__dirname, "server", "**/*.js"),
+        path.resolve(__dirname, "*.js"),
+        "!node_modules/**",
+    ],
+    path.resolve(__dirname, ".eslintrc.es5")
+));
+
+gulp.task("lint:app", tasks.lint(
+    [
+        path.resolve(__dirname, "app", "**/*.js"),
+        "!vendor/**",
+    ],
+    path.resolve(__dirname, ".eslintrc.react")
+));
+
+gulp.task("dev", ["clean", "lint:server"], tasks.nodemon("development", 8080));

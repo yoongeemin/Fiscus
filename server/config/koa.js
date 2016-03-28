@@ -1,18 +1,19 @@
-import path from "path";
-import logger from "koa-logger";
-import responeTime from "koa-response-time";
-import bodyParser from "koa-bodyparser";
-import compress from "koa-compress";
-import serve from "koa-static";
-import session from "koa-generic-session";
-import MongoStore from "koa-generic-session-mongo";
-import favicon from "koa-favicon";
-import csrf from "koa-csrf";
-import cors from "koa-cors";
-import views from "co-views";
-import config from "./config";
+"use strict";
+const path = require("path");
+const logger = require("koa-logger");
+const responeTime = require("koa-response-time");
+const bodyParser = require("koa-bodyparser");
+const compress = require("koa-compress");
+const serve = require("koa-static");
+const session = require("koa-generic-session");
+const MongoStore = require("koa-generic-session-mongo");
+const favicon = require("koa-favicon");
+const csrf = require("koa-csrf");
+const cors = require("koa-cors");
+const views = require("co-views");
+const config = require("./config");
 
-export default function(app, passport) {
+module.exports = function(app, passport) {
     if (process.env.NODE_ENV === "development") {
         app.use(logger());
     }
@@ -51,7 +52,7 @@ export default function(app, passport) {
 
     // Configure hot reloading
     if (process.env.NODE_ENV === "development") {
-        const webpackConfig = require("../../webpack/app/app.dev");
+        const webpackConfig = require("../../webpack/dev");
         const devMiddleware = require("koa-webpack-dev-middleware");
         const hotMiddleware = require("koa-webpack-hot-middleware");
         const compiler = require("webpack")(webpackConfig);
@@ -59,9 +60,6 @@ export default function(app, passport) {
         app.use(devMiddleware(compiler, {
             publicPath: webpackConfig.output.publicPath,
             quiet: true,
-            watchOptions: {
-                aggregateTimeout: 1000,
-            },
         }));
 
         app.use(hotMiddleware(compiler, {
@@ -72,4 +70,4 @@ export default function(app, passport) {
             timeout: 20 * 1000,
         }));
     }
-}
+};

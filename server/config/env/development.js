@@ -1,5 +1,7 @@
-export default {
-    domain: "localhost:8000",
+"use strict";
+
+module.exports = {
+    domain: `${process.env.HOSTNAME}:${process.env.PORT}`,
     db: "mongodb://localhost/fiscus",
     viewCache: false,
     facebook: {
