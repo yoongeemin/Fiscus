@@ -13,6 +13,9 @@ const cors = require("koa-cors");
 const views = require("co-views");
 const config = require("./config");
 
+// Bootstrap models
+require("../models/index");
+
 module.exports = function(app, passport) {
     if (process.env.NODE_ENV === "development") {
         app.use(logger());
