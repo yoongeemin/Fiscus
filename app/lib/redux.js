@@ -16,9 +16,6 @@ import createLogger from "redux-logger";
 //    return [dateString, timeString, secondString];
 //}
 
-
-
-
 export function configureStore(reducer) {
     const middlewares = [thunk];
 

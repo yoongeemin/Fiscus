@@ -1,6 +1,6 @@
-import { Router, Route, IndexRoute, browserHistory } from "react-router";
-import { App, SignUp } from "./containers/index";
-import { Authentication, DashBoard } from "./components/index";
+import { Route, IndexRoute } from "react-router";
+import { App, SignUp } from "../containers/index";
+import { Authentication, Dashboard } from "../components/index";
 
 export default (store) => {
     const authenticate = (nextState, replace, callback) => {
@@ -28,6 +28,7 @@ export default (store) => {
             {
                 path: "/",
                 component: Dashboard,
+                onEnter: authenticate,
                 // childRoutes: [
                 //     {
                 //         path: "ledger",

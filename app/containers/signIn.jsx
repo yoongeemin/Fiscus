@@ -8,7 +8,8 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleSubmit = () => {
+        this.handleSubmit = (e) => {
+            e.preventDefault();
             this.props.dispatch(signIn({
                 signin: this.refs.signin.value,
                 password: this.refs.password.value,
@@ -18,7 +19,7 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <form className="pull-right">
+            <form className="pull-right" onSubmit={this.handleSubmit}>
                 <table id="sign-in">
                     <tbody>
                         <tr>
@@ -31,7 +32,7 @@ class SignIn extends React.Component {
                                 <input type="password" className="input-default border-black" id="password" ref="password" placeholder="Password" />
                             </td>
                             <td>
-                                <button type="submit" className="btn btn-default btn-xs" onClick={this.handleSubmit}>Sign In</button>
+                                <button type="submit" className="btn btn-default btn-xs">Sign In</button>
                             </td>
                         </tr>
                         <tr>

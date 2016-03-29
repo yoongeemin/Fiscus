@@ -12,7 +12,7 @@ class NavBar extends React.Component {
 
         const navbarComponents = authenticated
             //? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
-            ? null
+            ? <div>loggedin</div>
             : <SignIn />;
 
         const tickers = authenticated

@@ -38,15 +38,15 @@ module.exports = function(app, passport) {
 
     app.proxy = true;
     app.keys = config.sessionSecret;
-    app.use(session({
-        cookie: {
-            httpOnly: true,
-            signed: true,
-        },
-        store: new MongoStore({
-            url: config.db,
-        }),
-    }));
+    //app.use(session({
+    //    cookie: {
+    //        httpOnly: true,
+    //        signed: true,
+    //    },
+    //    store: new MongoStore({
+    //        url: config.db,
+    //    }),
+    //}));
     csrf(app);
     app.use(csrf.middleware);
 
@@ -62,7 +62,8 @@ module.exports = function(app, passport) {
 
         app.use(devMiddleware(compiler, {
             publicPath: webpackConfig.output.publicPath,
-            quiet: true,
+            quiet: false,
+            noInfo: true,
         }));
 
         app.use(hotMiddleware(compiler, {

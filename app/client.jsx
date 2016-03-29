@@ -1,9 +1,10 @@
 import "./styles/base/index";
 
-import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import { syncHistoryWithStore } from "react-router-redux";
+import { Router, browserHistory } from "react-router";
 import reducers from "./reducers/index";
 import { configureStore } from "./lib/redux";
 import configureRoutes from "./config/routes";
