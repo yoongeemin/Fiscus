@@ -5,27 +5,45 @@ import { connect } from "react-redux";
 import { SignIn } from "./index";
 import { Tickers } from "../components/index";
 import { signOut } from "../actions/index";
+import { getQuotes } from "../actions/index";
 
 class NavBar extends React.Component {
+    componentDidMount() {
+        const { dispatch, user } = this.props;
+
+        const authenticated = !user.isEmpty();
+        if (authenticated) {
+            dispatch(getQuotes());
+        }
+    }
+
     render() {
-        const authenticated = !this.props.profile.isEmpty();
+        const { user, userLoading, quotes } = this.props;
+        const authenticated = !user.isEmpty();
 
-        const navbarComponents = authenticated
-            //? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
-            ? <div>loggedin</div>
-            : <SignIn />;
+        //const navbarComponents = authenticated
+        //    //? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
+        //    ? <div>loggedin</div>
+        //    : <SignIn />;
 
-        const tickers = authenticated
-            ? <Tickers quotes={this.props.quotes} />
-            : null;
+        //const tickers = authenticated
+        //    ? <Tickers quotes={this.props.quotes} />
+        //    : null;
 
         return (
             <nav id="navbar" className="fill-width fixed-top box-shadow on-top">
                 <div id="navbar-main">
                     <a href="javascript:void(0);">FISCUS</a>
-                    {navbarComponents}
+                    { authenticated
+                        ? <div>loggedin</div>
+                        : { !userLoading &&
+                            <SignIn />
+                        }
+                    }
                 </div>
-                {tickers}
+                { authenticated &&
+                    <Tickers quotes={quotes} />
+                }
             </nav>
         );
     }
@@ -33,15 +51,17 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
     dispatch: React.PropTypes.func.isRequired,
-    profile: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
+    userLoading: React.PropTypes.bool.isRequired,
     quotes: React.PropTypes.object.isRequired,
+    quotesLoading: React.PropTypes.bool.isRequired,
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
-         quotes: state.quoteReducer.quotes,
-         profile: state.userReducer.profile,
+        quotes: state.quoteReducer.quotes,
+        quotesLoading: state.quoteReducer.loading,
     };
-}
+};
 
-export default connect()(NavBar);
+export default connect(mapStateToProps)(NavBar);
