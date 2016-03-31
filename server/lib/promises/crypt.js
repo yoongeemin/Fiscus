@@ -1,5 +1,4 @@
 "use strict";
-const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const bluebird = require("bluebird");
@@ -10,7 +9,7 @@ module.exports = {
     genJwt: function(user) {
         return new bluebird((resolve, reject) => {
             jwt.sign(
-                _.omit(user, "password"),
+                user,
                 config.jwtSecret,
                 {
                     expiresIn: config.jwtExpir,
