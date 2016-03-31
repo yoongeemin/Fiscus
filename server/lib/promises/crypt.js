@@ -1,9 +1,39 @@
 "use strict";
+const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const bluebird = require("bluebird");
+const jwt = require("jsonwebtoken");
+const config = require("../../config/config");
 
 module.exports = {
+    genJwt: function(user) {
+        return new bluebird((resolve, reject) => {
+            jwt.sign(
+                _.omit(user, "password"),
+                config.jwtSecret,
+                {
+                    expiresIn: config.jwtExpir,
+                    issuer: process.env.HOSTNAME,
+                    aogorithm: "HS512",
+                },
+                (err, token) => {
+                    if (err) return reject(err);
+                    return resolve(token);
+                }
+            );
+        });
+    },
+
+    verifyJwt: function(token) {
+        return new bluebird((resolve, reject) => {
+            jwt.verify(token, config.jwtSecret, (err, decoded) => {
+                if (err) return reject(err);
+                return resolve(decoded);
+            });
+        });
+    },
+
     genSalt: function(rounds) {
         return new bluebird((resolve, reject) => {
             bcrypt.genSalt(rounds, (err, salt) => {

@@ -5,8 +5,6 @@ const responeTime = require("koa-response-time");
 const bodyParser = require("koa-bodyparser");
 const compress = require("koa-compress");
 const serve = require("koa-static");
-const session = require("koa-generic-session");
-const MongoStore = require("koa-generic-session-mongo");
 const favicon = require("koa-favicon");
 const csrf = require("koa-csrf");
 const cors = require("koa-cors");
@@ -37,16 +35,7 @@ module.exports = function(app, passport) {
     });
 
     app.proxy = true;
-    app.keys = config.sessionSecret;
-    //app.use(session({
-    //    cookie: {
-    //        httpOnly: true,
-    //        signed: true,
-    //    },
-    //    store: new MongoStore({
-    //        url: config.db,
-    //    }),
-    //}));
+
     csrf(app);
     app.use(csrf.middleware);
 

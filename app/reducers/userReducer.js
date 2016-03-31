@@ -7,6 +7,7 @@ export default function(state = {
     error: null,
 }, action = null) {
     switch (action.type) {
+        case Constants.AUTHENTICATE_REQUEST:
         case Constants.SIGNIN_USER_REQUEST:
         case Constants.SIGNUP_USER_REQUEST:
         case Constants.SIGNOUT_USER_REQUEST:
@@ -15,6 +16,7 @@ export default function(state = {
                 loading: true,
             });
         case Constants.SIGNIN_USER_SUCCESS:
+        case Constants.AUTHENTICATE_SUCCESS:
             return Object.assign({}, state, {
                 profile: Immutable.Map(action.data),
                 loading: false,
@@ -32,6 +34,7 @@ export default function(state = {
                 loading: false,
                 error: null,
             });
+        case Constants.AUTHENTICATE_FAILURE:
         case Constants.SIGNIN_USER_FAILURE:
         case Constants.SIGNOUT_USER_FAILURE:
         case Constants.SIGNUP_USER_FAILURE:

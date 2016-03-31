@@ -10,9 +10,10 @@ module.exports = function(app) {
     const router = new Router();
 
     // Local authentication
+    router.post(`${API_PREFIX}/authenticate`, authenticationControllers.authenticate);
     router.post(`${API_PREFIX}/signin`, authenticationControllers.signIn);
-    router.get(`${API_PREFIX}/signout`, authenticationControllers.signOut);
     router.post(`${API_PREFIX}/signUp`, authenticationControllers.signUp);
+    router.get(`${API_PREFIX}/signout`, authenticationControllers.signOut);
     router.get("/activate/:uid/:token", authenticationControllers.activate);
 
     router.get("*", function* () {

@@ -10,6 +10,7 @@ export const BACKDROP_STYLE = {
 };
 
 const API                            = `${HOSTNAME}:${PORT}/api`;
+export const AUTHENTICATE_API        = `${API}/authenticate/`;
 export const SIGNIN_API              = `${API}/signin/`;
 export const SIGNOUT_API             = `${API}/signout/`;
 export const SIGNUP_API              = `${API}/signup/`;
@@ -32,6 +33,9 @@ export const OPEN_APP                   = "OPEN_APP";
 export const CLOSE_APP                  = "CLOSE_APP";
 export const SIGN_IN                    = "SIGN_IN";
 export const SIGN_UP                    = "SIGN_UP";
+export const AUTHENTICATE_REQUEST       = "AUTHENTICATE_REQUEST";
+export const AUTHENTICATE_SUCCESS       = "AUTHENTICATE_SUCCESS";
+export const AUTHENTICATE_FAILURE       = "AUTHENTICATE_FAILURE";
 export const SIGNIN_USER_REQUEST        = "SIGNIN_USER_REQUEST";
 export const SIGNIN_USER_SUCCESS        = "SIGNIN_USER_SUCCESS";
 export const SIGNIN_USER_FAILURE        = "SIGNIN_USER_FAILURE";

@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import NavBar from "./navbar";
-import { getQuotes } from "../actions/index";
+import { getQuotes, authenticate } from "../actions/index";
 
 class App extends React.Component {
-    //componentDidMount() {
-    //    this.props.dispatch(getQuotes());
-    //}
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(authenticate());
+    }
 
     render() {
         return (

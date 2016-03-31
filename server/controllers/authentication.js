@@ -7,20 +7,31 @@ const mailer = require("../lib/promises/mailer");
 
 const TOKEN_SIZE = 32;
 
+function* authenticate() {
+    const jwt = this.cookies.get("fiscusJwt", { signed: true });
+
+    if (!jwt) {
+        this.throw("Not authenticated");
+    }
+    else {
+        this.body = yield crypt.verifyJwt(jwt);
+        this.status = 200;
+    }
+}
+
 function* signIn() {
-    const self = this;
+    const _this = this;
     yield* passport.authenticate("local", function* (err, user) {
         if (err) throw err;
-        if (!user.active) self.throw("Account is not activated");
+        if (!user.active) _this.throw("Account is not activated");
         else {
-            yield self.login(user);
-            self.body = {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                accounts: user.accounts,
-                preference: user.preference,
-            };
-            self.status = 200;
+            const jwt = yield crypt.genJwt(user);
+            this.cookies.set("fiscusJwt", jwt, {
+                httpOnly: true,
+                secure: true,
+                signed: true,
+            });
+            _this.status = 200;
         }
     }).call(this);
 }
