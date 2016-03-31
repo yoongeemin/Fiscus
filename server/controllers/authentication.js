@@ -1,4 +1,5 @@
 "use strict";
+const _ = require("lodash");
 const passport = require("koa-passport");
 const config = require("../config/config");
 const User = require("../models/user");
@@ -25,12 +26,14 @@ function* signIn() {
         if (err) throw err;
         if (!user.active) _this.throw("Account is not activated");
         else {
+            user = _.omit(user, "password");
             const jwt = yield crypt.genJwt(user);
             this.cookies.set("fiscusJwt", jwt, {
                 httpOnly: true,
                 secure: true,
                 signed: true,
             });
+            _this.body = user;
             _this.status = 200;
         }
     }).call(this);
