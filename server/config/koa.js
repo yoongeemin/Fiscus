@@ -6,6 +6,8 @@ const bodyParser = require("koa-bodyparser");
 const compress = require("koa-compress");
 const serve = require("koa-static");
 const favicon = require("koa-favicon");
+const session = require("koa-generic-session");
+const MongoStore = require("koa-generic-session-mongo");
 const csrf = require("koa-csrf");
 const cors = require("koa-cors");
 const views = require("co-views");
@@ -14,7 +16,7 @@ const config = require("./config");
 // Bootstrap models
 require("../models/index");
 
-module.exports = function(app, passport) {
+module.exports = (app, passport) => {
     if (process.env.NODE_ENV === "development") {
         app.use(logger());
     }
@@ -35,6 +37,16 @@ module.exports = function(app, passport) {
     });
 
     app.proxy = true;
+    app.keys = config.sessionSecret;
+    app.use(session({
+        cookie: {
+            httpOnly: true,
+            signed: true,
+        },
+        store: new MongoStore({
+            url: config.db,
+        }),
+    }));
 
     csrf(app);
     app.use(csrf.middleware);
@@ -51,8 +63,7 @@ module.exports = function(app, passport) {
 
         app.use(devMiddleware(compiler, {
             publicPath: webpackConfig.output.publicPath,
-            quiet: false,
-            noInfo: true,
+            quiet: true,
         }));
 
         app.use(hotMiddleware(compiler, {

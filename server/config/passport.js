@@ -2,7 +2,7 @@
 const local = require("./passport/local");
 const User = require("../models/user");
 
-module.exports = function(app, passport) {
+module.exports = (app, passport) => {
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });

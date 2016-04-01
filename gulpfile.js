@@ -18,9 +18,12 @@ gulp.task("lint:server", tasks.lint(
 gulp.task("lint:app", tasks.lint(
     [
         path.resolve(__dirname, "app", "**/*.js"),
+        path.resolve(__dirname, "app", "**/*.jsx"),
         "!vendor/**",
     ],
     path.resolve(__dirname, ".eslintrc.react")
 ));
 
-gulp.task("dev", ["clean", "lint:server"], tasks.nodemon("development", 8080));
+gulp.task("lint", ["lint:server", "lint:app"], (done) => { done(); });
+
+gulp.task("dev", ["clean", "lint"], tasks.nodemon("development", 8080));

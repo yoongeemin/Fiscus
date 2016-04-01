@@ -8,6 +8,13 @@ import { signOut } from "../actions/index";
 import { getQuotes } from "../actions/index";
 
 class NavBar extends React.Component {
+    constructor(props) {
+        super(props);
+        const { dispatch } = this.props;
+
+        this.handleSignout = () => { dispatch(signOut()); };
+    }
+
     componentDidMount() {
         const { dispatch, user } = this.props;
 
@@ -20,29 +27,17 @@ class NavBar extends React.Component {
     render() {
         const { user, userLoading, quotes } = this.props;
         const authenticated = !user.isEmpty();
-
-        //const navbarComponents = authenticated
-        //    //? <a onClick={this.props.dispatch(signOut())} href="javascript:void(0);">Sign Out</a>
-        //    ? <div>loggedin</div>
-        //    : <SignIn />;
-
-        //const tickers = authenticated
-        //    ? <Tickers quotes={this.props.quotes} />
-        //    : null;
-
         return (
             <nav id="navbar" className="fill-width fixed-top box-shadow on-top">
                 <div id="navbar-main">
                     <a href="javascript:void(0);">FISCUS</a>
                     { authenticated
-                        ? <div>loggedin</div>
-                        : { !userLoading &&
-                            <SignIn />
-                        }
+                        ? <a onClick={this.handleSignout} href="javascript:void(0);">Sign Out</a>
+                        : ( !userLoading && <SignIn /> )
                     }
                 </div>
                 { authenticated &&
-                    <Tickers quotes={quotes} />
+                <Tickers quotes={quotes} />
                 }
             </nav>
         );

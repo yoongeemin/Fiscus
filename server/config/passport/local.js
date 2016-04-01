@@ -9,7 +9,7 @@ function* authenticateUser(user, password, done) {
     else done(null, false, { message: "Invalid user or password" });
 }
 
-function signIn(signin, password, done) {
+const signIn = (signin, password, done) => {
     bluebird.coroutine(function* () {
         try {
             // Find user by email

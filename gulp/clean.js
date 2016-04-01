@@ -1,6 +1,6 @@
 const del = require("del");
 
-module.exports = function(done) {
+module.exports = (done) => {
     del([
         "!public",
         "public/**/*.js",
@@ -8,7 +8,7 @@ module.exports = function(done) {
         "public/**/*.css",
         "public/**/*.json",
         "public/assets/*",
-    ]).then(paths => {
+    ]).then((paths) => {
         console.info("Deleted files and folders:\n", paths.join("\n"));
         done();
     });

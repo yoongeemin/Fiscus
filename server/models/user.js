@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Hash user password
-UserSchema.pre("save", function(done) {
+UserSchema.pre("save", (done) => {
     const user = this;
 
     // Only hash the password if it has been added or modified

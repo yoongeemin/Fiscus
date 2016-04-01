@@ -1,26 +1,25 @@
-import { Route, IndexRoute } from "react-router";
 import { App, SignUp } from "../containers/index";
 import { Authentication, Dashboard } from "../components/index";
 
 export default (store) => {
-    const authenticate = (nextState, replace, callback) => {
-        const signedIn = !store.getState().userReducer.profile.isEmpty();
-        if (!signedIn) {
-            replace({
-               pathname: "/signin",
-               state: { nextPathname: nextState.location.pathname },
-            });
-        }
-        callback();
-    };
-
-    const redirect = (nextState, replace, callback) => {
-        const signedIn = !store.getState().userReducer.profile.isEmpty();
-        if (signedIn) {
-            replace({ pathname: "/" });
-        }
-        callback();
-    };
+    //const authenticate = (nextState, replace, callback) => {
+    //    const signedIn = !store.getState().userReducer.user.isEmpty();
+    //    if (!signedIn) {
+    //        replace({
+    //           pathname: "/signin",
+    //           state: { nextPathname: nextState.location.pathname },
+    //        });
+    //    }
+    //    callback();
+    //};
+    //
+    //const redirect = (nextState, replace, callback) => {
+    //    const signedIn = !store.getState().userReducer.user.isEmpty();
+    //    if (signedIn) {
+    //        replace({ pathname: "/" });
+    //    }
+    //    callback();
+    //};
 
     return {
         component: App,
@@ -28,7 +27,7 @@ export default (store) => {
             {
                 path: "/",
                 component: Dashboard,
-                onEnter: authenticate,
+                //onEnter: authenticate,
                 // childRoutes: [
                 //     {
                 //         path: "ledger",

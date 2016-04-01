@@ -1,5 +1,4 @@
 "use strict";
-const _ = require("lodash");
 const passport = require("koa-passport");
 const config = require("../config/config");
 const User = require("../models/user");
@@ -26,11 +25,17 @@ function* signIn() {
         if (err) throw err;
         if (!user.active) _this.throw("Account is not activated");
         else {
-            user = _.omit(user, "password");
+            user = {
+                email: user.email,
+                mobile: user.mobile,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                accounts: user.accounts,
+                preference: user.preference,
+            };
             const jwt = yield crypt.genJwt(user);
-            this.cookies.set("fiscusJwt", jwt, {
+            _this.cookies.set("fiscusJwt", jwt, {
                 httpOnly: true,
-                secure: true,
                 signed: true,
             });
             _this.body = user;
@@ -42,6 +47,13 @@ function* signIn() {
 function* signOut() {
     this.logout();
     this.session = null;
+    const name = "fiscusJwt";
+    const opts = {
+        expires: new Date(1),
+        path: "/",
+    };
+    this.cookies.set(name, "", opts);
+    this.cookies.set(`${name}.sig`, "", opts);
     this.status = 200;
 }
 
@@ -125,4 +137,5 @@ module.exports = {
     signOut,
     signUp,
     activate,
+    authenticate,
 };

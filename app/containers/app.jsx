@@ -14,7 +14,8 @@ class App extends React.Component {
             <div id="app">
                 <NavBar
                     user={this.props.user}
-                    userLoading={this.props.userLoading} />
+                    userLoading={this.props.userLoading}
+                />
                 {this.props.children}
             </div>
         );
@@ -30,9 +31,9 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userReducer.profile,
+        user: state.userReducer.user,
         userLoading: state.userReducer.loading,
-	};
+    };
 };
 
 export default connect(mapStateToProps)(App);

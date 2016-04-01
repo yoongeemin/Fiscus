@@ -2,7 +2,7 @@ import Immutable from "immutable";
 import * as Constants from "../lib/constants";
 
 export default function(state = {
-    profile: Immutable.Map(),
+    user: Immutable.Map(),
     loading: false,
     error: null,
 }, action = null) {
@@ -15,16 +15,16 @@ export default function(state = {
             return Object.assign({}, state, {
                 loading: true,
             });
-        case Constants.SIGNIN_USER_SUCCESS:
         case Constants.AUTHENTICATE_SUCCESS:
+        case Constants.SIGNIN_USER_SUCCESS:
             return Object.assign({}, state, {
-                profile: Immutable.Map(action.data),
+                user: Immutable.Map(action.data),
                 loading: false,
                 error: null,
             });
         case Constants.SIGNOUT_USER_SUCCESS:
             return Object.assign({}, state, {
-                profile: Immutable.Map(),
+                user: Immutable.Map(),
                 loading: false,
                 error: null,
             });

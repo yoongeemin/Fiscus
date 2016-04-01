@@ -5,11 +5,11 @@ export function authenticate() {
     return dispatch => {
         dispatch({ type: Constants.AUTHENTICATE_REQUEST });
 
-        POST(Constants.SIGNIN_API, credentials)
+        POST(Constants.AUTHENTICATE_API)
             .then((response) => {
                 dispatch({
                     type: Constants.AUTHENTICATE_SUCCESS,
-                    data: response,
+                    data: response.data,
                 });
             })
             .catch((error) => {
@@ -27,7 +27,10 @@ export function signIn(credentials) {
 
         POST(Constants.SIGNIN_API, credentials)
             .then((response) => {
-                dispatch({ type: Constants.SIGNIN_USER_SUCCESS });
+                dispatch({
+                    type: Constants.SIGNIN_USER_SUCCESS,
+                    data: response.data,
+                });
             })
             .catch((error) => {
                 dispatch({

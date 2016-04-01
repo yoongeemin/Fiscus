@@ -3,7 +3,7 @@ const bluebird = require("bluebird");
 const readFile = require("fs").readFile;
 const LOGGER = require("../logger");
 
-const openManifest = function(filename) {
+const openManifest = (filename) => {
     return bluebird.promisify(readFile)(filename)
         .then((manifest) => { return manifest; })
         .catch(() => {
@@ -14,7 +14,7 @@ const openManifest = function(filename) {
 };
 
 module.exports = {
-    loadManifest: function(filename) {
+    loadManifest: (filename) => {
         const timeout = setTimeout(() => {
             LOGGER.error(`Unable to load ${filename}`);
             throw new Error(`Unable to load ${filename}`);

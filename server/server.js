@@ -13,15 +13,15 @@ bootstrapPassport(app, passport);
 bootstrapKoa(app, passport);
 bootstrapRoutes(app);
 
-function listen() {
+const listen = () => {
     app.listen(process.env.PORT);
     LOGGER.info(`Server starting on port: ${process.env.PORT}`);
-}
+};
 
-function connect() {
+const connect = () => {
     mongoose.connect(config.db);
     return mongoose.connection;
-}
+};
 
 if (!module.parent) {
     connect()

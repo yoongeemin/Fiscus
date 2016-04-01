@@ -7,7 +7,6 @@ import { signIn } from "../actions/index";
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
-
         const { dispatch } = this.props;
 
         this.handleSubmit = (e) => {

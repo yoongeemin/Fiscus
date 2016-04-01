@@ -6,7 +6,7 @@ const authenticationControllers = require("../controllers/authentication");
 
 const API_PREFIX = "/api";
 
-module.exports = function(app) {
+module.exports = (app) => {
     const router = new Router();
 
     // Local authentication

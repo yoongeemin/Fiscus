@@ -4,7 +4,7 @@ const smtpTransport = require("nodemailer-smtp-transport");
 const bluebird = require("bluebird");
 
 module.exports = {
-    sendEmail: function(host, port, user, pass, to, subject, html) {
+    sendEmail: (host, port, user, pass, to, subject, html) => {
         return new bluebird((resolve, reject) => {
             const transport = nodemailer.createTransport(smtpTransport({
                 host,

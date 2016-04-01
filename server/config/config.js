@@ -5,12 +5,13 @@ const LOGGER = require("../lib/logger");
 
 const defaults = {
     root: path.resolve(__dirname, "..", ".."),
-    jwtSecret: "shhh this is a secret",
-    jwtExpir: "1d",
     smtpServer: "smtp.gmail.com",
     smtpPort: 587,
     smtpUser: "yoongeemin@gmail.com",
     smtpPassword: "jywzaiwblxbqfvug",
+    sessionSecret: ["shhh", "this is a csrf secret"],
+    jwtSecret: "this is a jwt secret",
+    jwtExpir: "1d",
 };
 
 let config;
