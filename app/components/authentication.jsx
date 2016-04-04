@@ -1,4 +1,4 @@
-import "../styles/components/authentication.scss";
+//import "../styles/components/authentication.scss";
 
 import React from "react";
 import { Link } from "react-router";

@@ -17,10 +17,6 @@ const config = require("./config");
 require("../models/index");
 
 module.exports = (app, passport) => {
-    if (process.env.NODE_ENV === "development") {
-        app.use(logger());
-    }
-
     app.use(responeTime());
     app.use(compress());
     app.use(bodyParser());
@@ -55,8 +51,10 @@ module.exports = (app, passport) => {
     app.use(passport.session());
 
     // Configure hot reloading
-    if (process.env.NODE_ENV === "development") {
-        const webpackConfig = require("../../webpack/dev");
+    if (process.env.NODE_ENV === "DEV") {
+        app.use(logger());
+
+        const webpackConfig = require("../../webpack/app/app.dev");
         const devMiddleware = require("koa-webpack-dev-middleware");
         const hotMiddleware = require("koa-webpack-hot-middleware");
         const compiler = require("webpack")(webpackConfig);

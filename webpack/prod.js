@@ -1,7 +1,6 @@
 "use strict";
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Configurator = require("webpack-config");
 
 module.exports = new Configurator()
@@ -9,12 +8,7 @@ module.exports = new Configurator()
 .merge({
     debug: false,
 
-    output: {
-        filename: "[name].js",
-    },
-
     plugins: [
-        new ExtractTextPlugin("[name].css"),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,

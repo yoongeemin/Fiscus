@@ -16,13 +16,13 @@ const defaults = {
 
 let config;
 switch (process.env.NODE_ENV) {
-    case "development":
+    case "DEV":
         config = require("./env/development");
         break;
-    case "qa":
+    case "QA":
         config = require("./env/qa");
         break;
-    case "production":
+    case "PROD":
         config = require("./env/production");
         break;
     default:

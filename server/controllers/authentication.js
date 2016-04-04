@@ -7,17 +7,17 @@ const mailer = require("../lib/promises/mailer");
 
 const TOKEN_SIZE = 32;
 
-function* authenticate() {
-    const jwt = this.cookies.get("fiscusJwt", { signed: true });
-
-    if (!jwt) {
-        this.throw("Not authenticated");
-    }
-    else {
-        this.body = yield crypt.verifyJwt(jwt);
-        this.status = 200;
-    }
-}
+//function* authenticate() {
+//    const jwt = this.cookies.get("fiscusJwt", { signed: true });
+//
+//    if (!jwt) {
+//        this.throw("Not authenticated");
+//    }
+//    else {
+//        this.body = yield crypt.verifyJwt(jwt);
+//        this.status = 200;
+//    }
+//}
 
 function* signIn() {
     const _this = this;
@@ -137,5 +137,4 @@ module.exports = {
     signOut,
     signUp,
     activate,
-    authenticate,
 };

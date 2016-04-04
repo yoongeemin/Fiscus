@@ -1,5 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { routerMiddleware } from "react-router-redux";
+import promise from "redux-promise"
 import createLogger from "redux-logger";
 
 //export function dateToString(date) {
@@ -16,12 +18,25 @@ import createLogger from "redux-logger";
 //    return [dateString, timeString, secondString];
 //}
 
-export function configureStore(reducer) {
-    const middlewares = [thunk];
+export const configureStore = (reducer, history, initialState) => {
+    const middlewares = [thunk, promise, routerMiddleware(history)];
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "DEV") {
         middlewares.push(createLogger());
     }
 
-    return createStore(reducer, applyMiddleware(...middlewares));
-}
+    return createStore(reducer, initialState, applyMiddleware(...middlewares));
+};
+//
+//export const requireAuth = (Component) => {
+//    class AuthenticatedComponent extends React.Component {
+//        constructor(props) {
+//            super(props);
+//            const { dispatch } = this.props;
+//
+//
+//        }
+//
+//
+//    }
+//};

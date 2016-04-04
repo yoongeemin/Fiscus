@@ -6,12 +6,13 @@ import { Provider } from "react-redux";
 import { syncHistoryWithStore } from "react-router-redux";
 import { Router, browserHistory } from "react-router";
 import reducers from "./reducers/index";
-import { configureStore } from "./lib/redux";
+import { configureStore } from "./lib/store";
 import configureRoutes from "./config/routes";
 
-const store = configureStore(reducers);
-const routes = configureRoutes(store);
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(reducers, browserHistory, initialState);
 const history = syncHistoryWithStore(browserHistory, store);
+const routes = configureRoutes(store);
 
 ReactDOM.render(
     (

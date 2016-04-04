@@ -1,14 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import NavBar from "./navbar";
-import { authenticate } from "../actions/index";
 
 class App extends React.Component {
-    componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(authenticate());
-    }
-
     render() {
         return (
             <div id="app">

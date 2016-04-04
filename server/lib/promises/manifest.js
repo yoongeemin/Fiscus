@@ -1,7 +1,6 @@
 "use strict";
 const bluebird = require("bluebird");
 const readFile = require("fs").readFile;
-const LOGGER = require("../logger");
 
 const openManifest = (filename) => {
     return bluebird.promisify(readFile)(filename)
@@ -16,15 +15,12 @@ const openManifest = (filename) => {
 module.exports = {
     loadManifest: (filename) => {
         const timeout = setTimeout(() => {
-            LOGGER.error(`Unable to load ${filename}`);
             throw new Error(`Unable to load ${filename}`);
         }, 60 * 1000);
 
-        LOGGER.info(`Loading ${filename}`);
         return openManifest(filename)
             .then((manifest) => {
                 clearTimeout(timeout);
-                LOGGER.info(`Successfullly loaded ${filename}`);
                 return JSON.parse(manifest);
             });
     },

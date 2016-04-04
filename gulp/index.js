@@ -3,5 +3,5 @@ module.exports = {
     build: require("./build"),
     lint: require("./lint"),
     nodemon: require("./nodemon"),
-    watch: require("./watch"),
+    env: require("./env"),
 };

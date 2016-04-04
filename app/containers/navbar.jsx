@@ -15,14 +15,14 @@ class NavBar extends React.Component {
         this.handleSignout = () => { dispatch(signOut()); };
     }
 
-    componentDidMount() {
-        const { dispatch, user } = this.props;
-
-        const authenticated = !user.isEmpty();
-        if (authenticated) {
-            dispatch(getQuotes());
-        }
-    }
+    //componentDidMount() {
+    //    const { dispatch, user } = this.props;
+    //
+    //    const authenticated = !user.isEmpty();
+    //    if (authenticated) {
+    //        dispatch(getQuotes());
+    //    }
+    //}
 
     render() {
         const { user, userLoading, quotes } = this.props;

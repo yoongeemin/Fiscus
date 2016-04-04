@@ -1,15 +1,15 @@
 "use strict";
 const path = require("path");
-const winston = require("winston");
 const moment = require("moment");
+const winston = require("winston");
 const DailyRotateTransport = require("winston-daily-rotate-file");
 
 const formatter = (options) => {
     const timestamp = options.timestamp();
     const level = winston.config.colorize(options.level, options.level.toUpperCase());
     const message = options.message;
-    return timestamp + " [" + level + "] " + message;
-}
+    return `${timestamp} [${level}] ${message}`;
+};
 
 module.exports = new (winston.Logger)({
     transports: [

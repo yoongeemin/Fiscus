@@ -1,26 +1,6 @@
 import { GET, POST } from "../lib/http";
 import * as Constants from "../lib/constants";
 
-export function authenticate() {
-    return dispatch => {
-        dispatch({ type: Constants.AUTHENTICATE_REQUEST });
-
-        POST(Constants.AUTHENTICATE_API)
-            .then((response) => {
-                dispatch({
-                    type: Constants.AUTHENTICATE_SUCCESS,
-                    data: response.data,
-                });
-            })
-            .catch((error) => {
-                dispatch({
-                    type: Constants.AUTHENTICATE_FAILURE,
-                    error,
-                });
-            });
-    };
-}
-
 export function signIn(credentials) {
     return dispatch => {
         dispatch({ type: Constants.SIGNIN_USER_REQUEST });

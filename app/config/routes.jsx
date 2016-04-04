@@ -42,12 +42,12 @@ export default (store) => {
             {
                 path: "/signin",
                 component: Authentication,
-                onEnter: redirect,
+                //onEnter: redirect,
             },
             {
                 path: "/signup",
                 component: SignUp,
-                onEnter: redirect,
+                //onEnter: redirect,
             },
         ],
     };

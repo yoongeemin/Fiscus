@@ -1,4 +1,4 @@
-import "../styles/components/signUp.scss";
+//import "../styles/components/signUp.scss";
 
 import React from "react";
 import { connect } from "react-redux";

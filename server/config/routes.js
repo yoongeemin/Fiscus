@@ -1,8 +1,10 @@
 "use strict";
 const Router = require("koa-router");
-const path = require("path");
-const loadManifest = require("../lib/promises/manifest").loadManifest;
+//const path = require("path");
+//const loadManifest = require("../lib/promises/manifest").loadManifest;
 const authenticationControllers = require("../controllers/authentication");
+
+const server = require("../../public/assets/server");
 
 const API_PREFIX = "/api";
 
@@ -10,20 +12,19 @@ module.exports = (app) => {
     const router = new Router();
 
     // Local authentication
-    router.post(`${API_PREFIX}/authenticate`, authenticationControllers.authenticate);
     router.post(`${API_PREFIX}/signin`, authenticationControllers.signIn);
     router.post(`${API_PREFIX}/signUp`, authenticationControllers.signUp);
     router.get(`${API_PREFIX}/signout`, authenticationControllers.signOut);
     router.get("/activate/:uid/:token", authenticationControllers.activate);
 
-    router.get("*", function* () {
-        const manifest = yield loadManifest(path.resolve(__dirname, "..", "..", "public", "manifest.json"), "app");
-        this.body = yield this.render("app.hjs", {
-            js: manifest.app.js,
-            css: manifest.app.css,
-            csrf: this.csrf,
-        });
-    });
+    router.get("*", server.render);
+
+        //const manifest = yield loadManifest(path.resolve(__dirname, "..", "..", "public", "manifest.json"), "app");
+        //this.body = yield this.render("app.hjs", {
+        //    js: manifest.app.js,
+        //    css: manifest.app.css,
+        //    csrf: this.csrf,
+        //});
 
     app.use(router.routes());
     app.use(router.allowedMethods());
