@@ -1,4 +1,3 @@
-"use strict";
 const path = require("path");
 const Configurator = require("webpack-config");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");

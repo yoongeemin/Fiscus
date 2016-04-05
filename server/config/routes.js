@@ -1,4 +1,3 @@
-"use strict";
 const Router = require("koa-router");
 //const path = require("path");
 //const loadManifest = require("../lib/promises/manifest").loadManifest;

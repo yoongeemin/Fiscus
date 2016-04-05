@@ -9,7 +9,7 @@ export const BACKDROP_STYLE = {
     opacity: 0.3,
 };
 
-const API                            = `${process.env.HOSTNAME}:${process.env.PORT}/api`;
+const API                            = `${__HOSTNAME__}:${__PORT__}/api`;
 export const AUTHENTICATE_API        = `${API}/authenticate/`;
 export const SIGNIN_API              = `${API}/signin/`;
 export const SIGNOUT_API             = `${API}/signout/`;

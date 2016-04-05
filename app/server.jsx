@@ -9,6 +9,26 @@ import configureRoutes from "./config/routes";
 import reducers from "./reducers/index";
 import { loadManifest } from "../server/lib/promises/manifest";
 
+function getAssets() {
+    switch (__ENV__) {
+        default:
+        case "DEV": {
+            return loadManifest(path.resolve(__dirname, "..", "public", "manifest.json"))
+                .then((manifest) => {
+                    return {
+                        js: manifest.app.js,
+                        css: manifest.app.css,
+                    };
+                });
+        }
+        case "PROD":
+            return bluebird.resolve({
+                js: "app.js",
+                css: "app.css",
+            });
+    }
+}
+
 export function* render() {
     const _this = this;
 
@@ -39,25 +59,7 @@ export function* render() {
 
     try {
         const main = yield html;
-
-        let assets;
-        switch (process.env.NODE_ENV) {
-            case "DEV": {
-                const manifest = yield loadManifest(path.resolve(__dirname, "..", "public", "manifest.json"));
-                assets = {
-                    js: manifest.app.js,
-                    css: manifest.app.css,
-                };
-                break;
-            }
-            case "PROD":
-                assets = {
-                    js: "app.js",
-                    css: "app.css",
-                };
-                break;
-        }
-
+        const assets = yield getAssets();
         _this.body = yield _this.render("app.hjs", {
             main,
             js: assets.js,

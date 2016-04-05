@@ -1,5 +1,5 @@
 {
-	"extends": ["airbnb", "./.eslintrc.base", "plugin:react/recommended"],
+	"extends": ["./.eslintrc.base", "plugin:react/recommended"],
 
     "env": {
         "es6": true,

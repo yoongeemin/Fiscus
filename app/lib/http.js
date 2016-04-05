@@ -8,7 +8,7 @@ export const GET = (url) => {
     });
 };
 
-export const POST = (url, data={}) => {
+export const POST = (url, data = {}) => {
     return axios.post(url, JSON.stringify(data), {
         headers: {
             "X-Requested-With": "XMLHttpRequest",

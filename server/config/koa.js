@@ -54,9 +54,9 @@ module.exports = (app, passport) => {
     if (process.env.NODE_ENV === "DEV") {
         app.use(logger());
 
-        const webpackConfig = require("../../webpack/app/app.dev");
         const devMiddleware = require("koa-webpack-dev-middleware");
         const hotMiddleware = require("koa-webpack-hot-middleware");
+        const webpackConfig = require("../../webpack/app/app.dev");
         const compiler = require("webpack")(webpackConfig);
 
         app.use(devMiddleware(compiler, {

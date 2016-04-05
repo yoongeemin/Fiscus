@@ -1,5 +1,5 @@
 {
-    "extends": ["eslint:recommended"],
+    "extends": ["airbnb"],
 
     "parserOptions": {
         "sourceType": "module",
@@ -25,6 +25,8 @@
         "consistent-return": 0,
         "prefer-template": 1,
         "no-multiple-empty-lines": 1,
-        "comma-dangle": [1, "always-multiline"]
+        "comma-dangle": [1, "always-multiline"],
+        "no-multi-spaces": [2, { "exceptions": { "VariableDeclarator": true } }],
+        "strict": 0,
     },
 }

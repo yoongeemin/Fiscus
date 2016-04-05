@@ -1,5 +1,5 @@
-"use strict";
 const path = require("path");
+const webpack = require("webpack");
 const Configurator = require("webpack-config");
 
 module.exports = new Configurator().merge({
@@ -19,6 +19,15 @@ module.exports = new Configurator().merge({
         libraryTarget: "commonjs2",
     },
 
+    plugins: [
+        new webpack.DefinePlugin({
+            __ENV__: JSON.stringify(process.env.NODE_ENV),
+            __HOSTNAME__: JSON.stringify(process.env.HOSTNAME),
+            __PORT__: JSON.stringify(process.env.PORT),
+            __CLIENT__: false,
+        }),
+    ],
+
     module: {
         loaders: [
             {
@@ -26,14 +35,6 @@ module.exports = new Configurator().merge({
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
-            //{
-            //    test: /\.css$/,
-            //    loaders: ["style", "css"],
-            //},
-            //{
-            //    test: /\.scss$/,
-            //    loaders: ["style", "css", "sass"],
-            //},
         ],
     },
 });

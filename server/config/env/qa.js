@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
     domain: "localhost:8000",
     db: "mongodb://localhost/noobjs_dev",

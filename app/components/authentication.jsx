@@ -1,7 +1,7 @@
-//import "../styles/components/authentication.scss";
-
 import React from "react";
 import { Link } from "react-router";
+
+if (__CLIENT__) require("../styles/components/authentication.scss");
 
 export default class Authentication extends React.Component {
     render() {

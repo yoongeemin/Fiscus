@@ -1,4 +1,3 @@
-"use strict";
 const bluebird = require("bluebird");
 const readFile = require("fs").readFile;
 

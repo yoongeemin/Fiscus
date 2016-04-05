@@ -1,4 +1,3 @@
-"use strict";
 const bluebird = require("bluebird");
 const crypt = require("../lib/promises/crypt");
 const mongoose = require("mongoose");

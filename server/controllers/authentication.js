@@ -7,17 +7,14 @@ const mailer = require("../lib/promises/mailer");
 
 const TOKEN_SIZE = 32;
 
-//function* authenticate() {
-//    const jwt = this.cookies.get("fiscusJwt", { signed: true });
-//
-//    if (!jwt) {
-//        this.throw("Not authenticated");
-//    }
-//    else {
-//        this.body = yield crypt.verifyJwt(jwt);
-//        this.status = 200;
-//    }
-//}
+function* authenticate() {
+    const jwt = this.cookies.get("fiscusJwt", { signed: true });
+    if (!jwt) { this.throw("Not authenticated"); }
+    else {
+        this.body = yield crypt.verifyJwt(jwt);
+        this.status = 200;
+    }
+}
 
 function* signIn() {
     const _this = this;
@@ -58,13 +55,11 @@ function* signOut() {
 }
 
 function* signUp() {
-    const userByEmail = yield User.findOne({email: this.request.body.email}).exec();
-    if (userByEmail)
-        this.throw("Email already exists");
+    const userByEmail = yield User.findOne({ email: this.request.body.email }).exec();
+    if (userByEmail) this.throw("Email already exists");
 
-    const userByMobile = yield User.findOne({email: this.request.body.mobile}).exec();
-    if (userByMobile)
-        this.throw("Phone number already exists");
+    const userByMobile = yield User.findOne({ email: this.request.body.mobile }).exec();
+    if (userByMobile) this.throw("Phone number already exists");
 
     try {
         const token = yield crypt.randomBytes(TOKEN_SIZE);

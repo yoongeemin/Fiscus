@@ -1,9 +1,9 @@
-//import "../styles/components/signUp.scss";
-
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 import { signUp } from "../actions/index";
+
+if (__CLIENT__) require("../styles/components/signUp.scss");
 
 class SignUp extends React.Component {
     constructor(props) {

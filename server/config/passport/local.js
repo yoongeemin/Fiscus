@@ -1,4 +1,3 @@
-"use strict";
 const bluebird = require("bluebird");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../../models/user");
@@ -23,6 +22,6 @@ const signIn = (signin, password, done) => {
         }
         catch (err) { done(err); }
     })().then(done);
-}
+};
 
 module.exports = new LocalStrategy({ usernameField: "signin" }, signIn);

@@ -1,4 +1,3 @@
-"use strict";
 const local = require("./passport/local");
 const User = require("../models/user");
 

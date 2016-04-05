@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { routerMiddleware } from "react-router-redux";
-import promise from "redux-promise"
+import promise from "redux-promise";
 import createLogger from "redux-logger";
 
 //export function dateToString(date) {

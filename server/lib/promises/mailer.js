@@ -1,4 +1,3 @@
-"use strict";
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const bluebird = require("bluebird");

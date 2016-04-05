@@ -1,11 +1,11 @@
-import "../styles/components/navbar.scss";
-
 import React from "react";
 import { connect } from "react-redux";
 import { SignIn } from "./index";
 import { Tickers } from "../components/index";
 import { signOut } from "../actions/index";
 import { getQuotes } from "../actions/index";
+
+if (__CLIENT__) require("../styles/components/navbar.scss");
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
                     <a href="javascript:void(0);">FISCUS</a>
                     { authenticated
                         ? <a onClick={this.handleSignout} href="javascript:void(0);">Sign Out</a>
-                        : ( !userLoading && <SignIn /> )
+                        : (!userLoading && <SignIn />)
                     }
                 </div>
                 { authenticated &&

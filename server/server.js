@@ -1,4 +1,3 @@
-"use strict";
 const koa = require("koa");
 const mongoose = require("mongoose");
 const passport = require("passport");

@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
     domain: `${process.env.HOSTNAME}:${process.env.PORT}`,
     db: "mongodb://localhost/fiscus",

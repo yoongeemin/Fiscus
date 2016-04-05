@@ -1,8 +1,8 @@
-//import "../styles/components/signIn.scss";
-
 import React from "react";
 import { connect } from "react-redux";
 import { signIn } from "../actions/index";
+
+if (__CLIENT__) require("../styles/components/signIn.scss");
 
 class SignIn extends React.Component {
     constructor(props) {
