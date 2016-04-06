@@ -24,8 +24,6 @@ const connect = () => {
 
 if (!module.parent) {
     connect()
-        .on("error", () => {
-            LOGGER.error(`Failed to connect to mongodb server: ${config.db}`);
-        })
+        .on("error", () => { LOGGER.error(`Failed to connect to mongodb server: ${config.db}`); })
         .on("open", listen);
 }
