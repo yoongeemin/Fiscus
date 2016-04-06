@@ -9,8 +9,8 @@ import configureRoutes from "./config/routes";
 import reducers from "./reducers/index";
 import { loadManifest } from "../server/lib/promises/manifest";
 
-function getAssets() {
-    switch (__ENV__) {
+const getAssets = (env) => {
+    switch (env) {
         default:
         case "DEV": {
             return loadManifest(path.resolve(__dirname, "..", "public", "manifest.json"))
@@ -32,64 +32,43 @@ function getAssets() {
 export function* render() {
     const _this = this;
 
-    const initialState = {};
-    const store = configureStore(reducers, browserHistory, initialState);
+    const store = configureStore(reducers, browserHistory, {});
     const routes = configureRoutes(store);
 
-    //const html = new bluebird((resolve) => {
-    //    match({ routes, location: _this.url }, (err, redirect, props) => {
-    //        if (err) {
-    //            _this.throw(err, 500);
-    //        }
-    //        else if (redirect) {
-    //            _this.redirect(`${redirect.pathname}${redirect.search}`);
-    //        }
-    //        else if (props) {
-    //            resolve(renderToString(
-    //                <Provider store={store}>
-    //                    <RouterContext {...props} />
-    //                </Provider>
-    //            ));
-    //        }
-    //        else {
-    //            _this.throw(404);
-    //        }
-    //    });
-    //});
-    const getProps = new bluebird((resolve) => {
-        match({ routes, location: _this.url }, (err, redirect, props) => {
-            if (err) { _this.throw(err, 500); }
-            else if (redirect) { _this.redirect(`${redirect.pathname}${redirect.search}`); }
-            else if (props) { resolve(props); }
-            else { _this.throw(404); }
-        });
+    match({ routes, location: _this.url }, (err, redirect, props) => {
+        if (err) { _this.throw(err, 500); }
+        else if (redirect) { _this.redirect(`${redirect.pathname}${redirect.search}`); }
+        else if (props) {
+            const promises = [getAssets(__ENV__)];
+
+            promises.concat(props.components.reduce((prev, current) => {
+               return prev.concat(current.WrappedComponent ? (current.WrappedComponent.init || []) : []);
+            }, []));
+
+            bluebird.all(promises)
+                .then((assets) => {
+                    const main = renderToString(
+                        <Provider store={store}>
+                            <RouterContext {...props} />
+                        </Provider>
+                    );
+
+                    return bluebird.coroutine(function* () {
+                        yield _this.render("app.hjs", {
+                            main,
+                            initialState: store.getState(),
+                            js: assets.js,
+                            css: assets.css,
+                        });
+                    });
+                })
+                .then((html) => {
+                    _this.body = html;
+                })
+                .catch((err) => {
+                    _this.throw(500, err.message());
+                });
+        }
+        else { _this.throw(404); }
     });
-
-    const html = getProps
-        .then((props) => {
-            //const promises = props.components.reduce((prev, current) => {
-            //    return prev
-            //        .concat(current.init || [])
-            //        .concat(current.WrappedComponent ? (current.WrappedComponent.init || []) : []);
-            //}, []);
-
-            return renderToString(
-                <Provider store={store}>
-                    <RouterContext {...props} />
-                </Provider>
-            );
-        });
-
-    try {
-        const main = yield html;
-        const assets = yield getAssets();
-        _this.body = yield _this.render("app.hjs", {
-            main,
-            //js: assets.js,
-            css: assets.css,
-        });
-    }
-    catch (err) {
-        _this.throw(err);
-    }
 }
