@@ -13,7 +13,7 @@ const initialState = window.__INITIAL_STATE__;
 const store = configureStore(reducers, browserHistory, initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = configureRoutes(store);
-console.log(process.env.NODE_ENV);
+
 ReactDOM.render(
     (
         <Provider store={store}>

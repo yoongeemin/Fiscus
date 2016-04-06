@@ -6,6 +6,10 @@ import { signUp } from "../actions/index";
 if (__CLIENT__) require("../styles/components/signUp.scss");
 
 class SignUp extends React.Component {
+    static propTypes = {
+        dispatch: React.PropTypes.func.isRequired,
+    };
+
     constructor(props) {
         super(props);
 
@@ -61,9 +65,5 @@ class SignUp extends React.Component {
         );
     }
 }
-
-SignUp.propTypes = {
-    dispatch: React.PropTypes.func.isRequired,
-};
 
 export default connect()(SignUp);

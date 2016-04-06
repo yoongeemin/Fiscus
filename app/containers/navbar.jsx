@@ -8,6 +8,14 @@ import { getQuotes } from "../actions/index";
 if (__CLIENT__) require("../styles/components/navbar.scss");
 
 class NavBar extends React.Component {
+    static propTypes = {
+        dispatch: React.PropTypes.func.isRequired,
+        user: React.PropTypes.object.isRequired,
+        userLoading: React.PropTypes.bool.isRequired,
+        quotes: React.PropTypes.object.isRequired,
+        quotesLoading: React.PropTypes.bool.isRequired,
+    };
+
     constructor(props) {
         super(props);
         const { dispatch } = this.props;
@@ -43,14 +51,6 @@ class NavBar extends React.Component {
         );
     }
 }
-
-NavBar.propTypes = {
-    dispatch: React.PropTypes.func.isRequired,
-    user: React.PropTypes.object.isRequired,
-    userLoading: React.PropTypes.bool.isRequired,
-    quotes: React.PropTypes.object.isRequired,
-    quotesLoading: React.PropTypes.bool.isRequired,
-};
 
 const mapStateToProps = (state) => {
     return {

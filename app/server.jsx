@@ -36,33 +36,56 @@ export function* render() {
     const store = configureStore(reducers, browserHistory, initialState);
     const routes = configureRoutes(store);
 
-    const html = new bluebird((resolve) => {
+    //const html = new bluebird((resolve) => {
+    //    match({ routes, location: _this.url }, (err, redirect, props) => {
+    //        if (err) {
+    //            _this.throw(err, 500);
+    //        }
+    //        else if (redirect) {
+    //            _this.redirect(`${redirect.pathname}${redirect.search}`);
+    //        }
+    //        else if (props) {
+    //            resolve(renderToString(
+    //                <Provider store={store}>
+    //                    <RouterContext {...props} />
+    //                </Provider>
+    //            ));
+    //        }
+    //        else {
+    //            _this.throw(404);
+    //        }
+    //    });
+    //});
+    const getProps = new bluebird((resolve) => {
         match({ routes, location: _this.url }, (err, redirect, props) => {
-            if (err) {
-                _this.throw(err, 500);
-            }
-            else if (redirect) {
-                _this.redirect(`${redirect.pathname}${redirect.search}`);
-            }
-            else if (props) {
-                resolve(renderToString(
-                    <Provider store={store}>
-                        <RouterContext {...props} />
-                    </Provider>
-                ));
-            }
-            else {
-                _this.throw(404);
-            }
+            if (err) { _this.throw(err, 500); }
+            else if (redirect) { _this.redirect(`${redirect.pathname}${redirect.search}`); }
+            else if (props) { resolve(props); }
+            else { _this.throw(404); }
         });
     });
+
+    const html = getProps
+        .then((props) => {
+            //const promises = props.components.reduce((prev, current) => {
+            //    return prev
+            //        .concat(current.init || [])
+            //        .concat(current.WrappedComponent ? (current.WrappedComponent.init || []) : []);
+            //}, []);
+
+            return renderToString(
+                <Provider store={store}>
+                    <RouterContext {...props} />
+                </Provider>
+            );
+        });
 
     try {
         const main = yield html;
         const assets = yield getAssets();
         _this.body = yield _this.render("app.hjs", {
             main,
-            js: assets.js,
+            //js: assets.js,
             css: assets.css,
         });
     }

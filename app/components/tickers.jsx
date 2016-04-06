@@ -2,6 +2,9 @@ import React from "react";
 import classnames from "classnames";
 
 export default class Ticker extends React.Component {
+    static propTypes = {
+        quotes: React.PropTypes.object.isRequired,
+    };
     componentDidMount() {
         //const options = {
         //    height: 32,
@@ -38,7 +41,3 @@ export default class Ticker extends React.Component {
         );
     }
 }
-
-Ticker.propTypes = {
-    quotes: React.PropTypes.object.isRequired,
-};
