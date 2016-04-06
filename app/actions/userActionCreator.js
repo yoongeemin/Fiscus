@@ -5,12 +5,13 @@ export function authenticate() {
     return dispatch => {
         dispatch({ type: Constants.AUTHENTICATE_REQUEST });
 
-        POST(Constants.AUTHENTICATE_API, credentials)
+        POST(Constants.AUTHENTICATE_API)
             .then((response) => {
                 dispatch({
                     type: Constants.AUTHENTICATE_SUCCESS,
                     data: response.data,
                 });
+                dispatch(require("./index").getQuotes());
             })
             .catch((error) => {
                 dispatch({
