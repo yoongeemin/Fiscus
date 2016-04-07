@@ -132,4 +132,5 @@ module.exports = {
     signOut,
     signUp,
     activate,
+    authenticate,
 };

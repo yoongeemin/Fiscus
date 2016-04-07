@@ -12,7 +12,7 @@ class NavBar extends React.Component {
         dispatch: React.PropTypes.func.isRequired,
         user: React.PropTypes.object.isRequired,
         userLoading: React.PropTypes.bool.isRequired,
-        quotes: React.PropTypes.object.isRequired,
+        quotes: React.PropTypes.array.isRequired,
         quotesLoading: React.PropTypes.bool.isRequired,
     };
 
@@ -34,7 +34,7 @@ class NavBar extends React.Component {
 
     render() {
         const { user, userLoading, quotes } = this.props;
-        const authenticated = !user.isEmpty();
+        const authenticated = user.size !== 0;
         return (
             <nav id="navbar" className="fill-width fixed-top box-shadow on-top">
                 <div id="navbar-main">

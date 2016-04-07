@@ -28,7 +28,7 @@
         "prefer-template": 1,
         "no-multiple-empty-lines": 1,
         "comma-dangle": [1, "always-multiline"],
-        "no-multi-spaces": [2, { "exceptions": { "VariableDeclarator": true } }],
+        "no-multi-spaces": 0,
         "strict": 0,
     },
 }

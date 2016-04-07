@@ -1,5 +1,6 @@
 const Router = require("koa-router");
 const authenticationControllers = require("../controllers/authentication");
+const appControllers = require("../controllers/app");
 
 const server = require("../../public/assets/server");
 
@@ -17,7 +18,7 @@ module.exports = (app) => {
 
 	// Application API
     router.get(`${API_PREFIX}/quotes`, appControllers.getQuotes);
-    
+
     // Server side rendering
     router.get("*", server.render);
 

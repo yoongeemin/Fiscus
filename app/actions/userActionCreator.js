@@ -11,6 +11,7 @@ export function authenticate() {
                     type: Constants.AUTHENTICATE_SUCCESS,
                     data: response.data,
                 });
+                console.log("success!!!");
                 dispatch(require("./index").getQuotes());
             })
             .catch((error) => {

@@ -9,6 +9,10 @@ export const BACKDROP_STYLE = {
     opacity: 0.3,
 };
 
+export const DEV  = "DEV";
+export const QA   = "QA";
+export const PROD = "PROD";
+
 const API                            = `${__HOSTNAME__}:${__PORT__}/api`;
 export const AUTHENTICATE_API        = `${API}/authenticate/`;
 export const SIGNIN_API              = `${API}/signin/`;
