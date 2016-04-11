@@ -13,7 +13,7 @@ module.exports = {
                 {
                     expiresIn: config.jwtExpir,
                     issuer: process.env.HOSTNAME,
-                    aogorithm: "HS512",
+                    algorithm: "HS512",
                 },
                 (token) => {
                     if (token) return resolve(token);

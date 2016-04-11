@@ -1,4 +1,5 @@
 import React from "react";
+import Immutable from "immutable";
 import { connect } from "react-redux";
 import { SignIn } from "./index";
 import { Tickers } from "../components/index";
@@ -10,9 +11,9 @@ if (__CLIENT__) require("../styles/components/navbar.scss");
 class NavBar extends React.Component {
     static propTypes = {
         dispatch: React.PropTypes.func.isRequired,
-        user: React.PropTypes.object.isRequired,
+        user: React.PropTypes.instanceOf(Immutable.Map).isRequired,
         userLoading: React.PropTypes.bool.isRequired,
-        quotes: React.PropTypes.array.isRequired,
+        quotes: React.PropTypes.instanceOf(Immutable.List).isRequired,
         quotesLoading: React.PropTypes.bool.isRequired,
     };
 
@@ -23,18 +24,10 @@ class NavBar extends React.Component {
         this.handleSignout = () => { dispatch(signOut()); };
     }
 
-    //componentDidMount() {
-    //    const { dispatch, user } = this.props;
-    //
-    //    const authenticated = !user.isEmpty();
-    //    if (authenticated) {
-    //        dispatch(getQuotes());
-    //    }
-    //}
-
     render() {
         const { user, userLoading, quotes } = this.props;
-        const authenticated = user.size !== 0;
+
+        const authenticated = !user.isEmpty();
         return (
             <nav id="navbar" className="fill-width fixed-top box-shadow on-top">
                 <div id="navbar-main">
@@ -44,19 +37,10 @@ class NavBar extends React.Component {
                         : (!userLoading && <SignIn />)
                     }
                 </div>
-                { authenticated &&
-                <Tickers quotes={quotes} />
-                }
+                { authenticated && <Tickers quotes={quotes} /> }
             </nav>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        quotes: state.quoteReducer.quotes,
-        quotesLoading: state.quoteReducer.loading,
-    };
-};
-
-export default connect(mapStateToProps)(NavBar);
+export default connect()(NavBar);

@@ -43,18 +43,20 @@ function parseData(data) {
     return quotes;
 }
 
-export default function(state = {
+const initialState = Immutable.Map({
     quotes: Immutable.List(),
     loading: false,
     error: null,
-}, action = null) {
+});
+
+export default (state = initialState, action = {}) => {
     switch (action.type) {
         case Constants.GET_QUOTES_REQUEST:
-            return Object.assign({}, state, {
+            return state.merge({
                 loading: true,
             });
         case Constants.GET_QUOTES_SUCCESS:
-            return Object.assign({}, state, {
+            return state.merge({
                 quotes: Immutable.List(parseData(action.data)),
                 loading: false,
                 error: null,
@@ -62,4 +64,4 @@ export default function(state = {
         default:
             return state;
     }
-}
+};

@@ -1,27 +1,22 @@
-const bluebird = require("bluebird");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../../models/user");
-
-function* authenticateUser(user, password, done) {
-    const match = yield* user.authenticate(password);
-    if (match) done(null, user);
-    else done(null, false, { message: "Invalid user or password" });
-}
+const crypt = require("../../lib/promises/crypt");
 
 const signIn = (signin, password, done) => {
-    bluebird.coroutine(function* () {
-        try {
-            // Find user by email
-            const userByEmail = yield User.findOne({ email: signin }).exec();
-            if (userByEmail) yield* authenticateUser(userByEmail, password, done);
-
-            // Find user by mobile
-            const userByMobile = yield User.findOne({ mobile: signin }).exec();
-            if (userByMobile) yield* authenticateUser(userByMobile, password, done);
-            done(null, false, { message: "Invalid user or password" });
-        }
-        catch (err) { done(err); }
-    })().then(done);
+    User.findOne({ $or: [{ email: signin }, { mobile: signin }] }).exec()
+        .then((user) => {
+            if (user) {
+                crypt.compare(password, user.password)
+                    .then((match) => {
+                        if (match) return done(null, user);
+                        return done("Invalid user or password", null);
+                    });
+            }
+            else return done("Email or phone number does not exist", null);
+        })
+        .catch((err) => {
+            return done(null, err);
+        });
 };
 
 module.exports = new LocalStrategy({ usernameField: "signin" }, signIn);

@@ -8,6 +8,7 @@ const mailer = require("../lib/promises/mailer");
 const TOKEN_SIZE = 32;
 
 function* authenticate() {
+    const x = this.cookies.toString();
     const jwt = this.cookies.get("fiscusJwt", { signed: true });
     if (!jwt) { this.throw("Not authenticated"); }
     else {
@@ -18,8 +19,8 @@ function* authenticate() {
 
 function* signIn() {
     const _this = this;
-    yield* passport.authenticate("local", function* (err, user) {
-        if (err) throw err;
+    yield passport.authenticate("local", function* (err, user) {
+        if (err) _this.throw(err);
         if (!user.active) _this.throw("Account is not activated");
         else {
             user = {
@@ -30,8 +31,8 @@ function* signIn() {
                 accounts: user.accounts,
                 preference: user.preference,
             };
-            const jwt = yield crypt.genJwt(user);
-            _this.cookies.set("fiscusJwt", jwt, {
+
+            _this.cookies.set("fiscusJwt", yield crypt.genJwt(user), {
                 httpOnly: true,
                 signed: true,
             });
@@ -128,9 +129,9 @@ function* activate() {
 }
 
 module.exports = {
+    authenticate,
     signIn,
     signOut,
     signUp,
     activate,
-    authenticate,
 };

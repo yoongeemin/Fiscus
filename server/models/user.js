@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
         lowercase: true,
     },
     mobile: {
-        type: Number,
+        type: String,
         required: false,
     },
     password: {
@@ -64,11 +64,5 @@ UserSchema.pre("save", (done) => {
         }
     })().then(done);
 });
-
-UserSchema.methods = {
-    *authenticate(password) {
-        return yield crypt.compare(password, this.password);
-    },
-};
 
 module.exports = mongoose.model("User", UserSchema);

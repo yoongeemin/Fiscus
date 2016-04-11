@@ -23,20 +23,14 @@ export const configureStore = (reducer, history, initialState) => {
 
     if (process.env.NODE_ENV === "DEV") {
         middlewares.push(createLogger());
+
+        if (module.hot) {
+            module.hot.accept("../reducers/index", () => {
+                const nextReducer = require("../reducers/index").default;
+                store.replaceReducer(nextReducer);
+            });
+        }
     }
 
     return createStore(reducer, initialState, applyMiddleware(...middlewares));
 };
-//
-//export const requireAuth = (Component) => {
-//    class AuthenticatedComponent extends React.Component {
-//        constructor(props) {
-//            super(props);
-//            const { dispatch } = this.props;
-//
-//
-//        }
-//
-//
-//    }
-//};

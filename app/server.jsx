@@ -1,5 +1,6 @@
 import path from "path";
 import React from "react";
+import Immutable from "immutable";
 import { Provider } from "react-redux";
 import { renderToString } from "react-dom/server";
 import { RouterContext, browserHistory, match } from "react-router";
@@ -33,8 +34,7 @@ const getAssets = (env) => {
 
 export function* render() {
     const _this = this;
-
-    const store = configureStore(reducers, browserHistory, {});
+    const store = configureStore(reducers, browserHistory, Immutable.Map());
     const routes = configureRoutes(store);
 
     const matchPromise = bluebird.promisify(match, { multiArgs: true });
@@ -52,7 +52,6 @@ export function* render() {
                             : []
                     );
                 }, []));
-
                 return bluebird.all(promises);
             }
             else { _this.throw(404); }
@@ -69,6 +68,7 @@ export function* render() {
 
             return {
                 main,
+                csrf: _this.csrf,
                 initialState: JSON.stringify(store.getState()),
                 js: assets.js,
                 css: assets.css,

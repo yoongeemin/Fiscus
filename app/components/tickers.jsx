@@ -1,9 +1,10 @@
 import React from "react";
+import Immutable from "immutable";
 import classnames from "classnames";
 
 export default class Ticker extends React.Component {
     static propTypes = {
-        quotes: React.PropTypes.object.isRequired,
+        quotes: React.PropTypes.instanceOf(Immutable.List).isRequired,
     };
     componentDidMount() {
         //const options = {

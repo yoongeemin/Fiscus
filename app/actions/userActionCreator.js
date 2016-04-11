@@ -1,21 +1,21 @@
 import { GET, POST } from "../lib/http";
 import * as Constants from "../lib/constants";
+import { getQuotes } from "./index";
 
 export function authenticate() {
     return dispatch => {
         dispatch({ type: Constants.AUTHENTICATE_REQUEST });
 
-        POST(Constants.AUTHENTICATE_API)
+        return GET(Constants.AUTHENTICATE_API)
             .then((response) => {
-                dispatch({
+                return dispatch({
                     type: Constants.AUTHENTICATE_SUCCESS,
                     data: response.data,
                 });
-                console.log("success!!!");
-                dispatch(require("./index").getQuotes());
+                //dispatch(getQuotes());
             })
             .catch((error) => {
-                dispatch({
+                return dispatch({
                     type: Constants.AUTHENTICATE_FAILURE,
                     error,
                 });
@@ -27,15 +27,15 @@ export function signIn(credentials) {
     return dispatch => {
         dispatch({ type: Constants.SIGNIN_USER_REQUEST });
 
-        POST(Constants.SIGNIN_API, credentials)
+        return POST(Constants.SIGNIN_API, credentials)
             .then((response) => {
-                dispatch({
+                return dispatch({
                     type: Constants.SIGNIN_USER_SUCCESS,
                     data: response.data,
                 });
             })
             .catch((error) => {
-                dispatch({
+                return dispatch({
                     type: Constants.SIGNIN_USER_FAILURE,
                     error,
                 });
@@ -47,12 +47,12 @@ export function signOut() {
     return dispatch => {
         dispatch({ type: Constants.SIGNOUT_USER_REQUEST });
 
-        GET(Constants.SIGNOUT_API)
+        return GET(Constants.SIGNOUT_API)
             .then(() => {
-                dispatch({ type: Constants.SIGNOUT_USER_SUCCESS });
+                return dispatch({ type: Constants.SIGNOUT_USER_SUCCESS });
             })
             .catch((error) => {
-                dispatch({
+                return dispatch({
                     type: Constants.SIGNOUT_USER_FAILURE,
                     error,
                 });
@@ -64,12 +64,12 @@ export function signUp(credentials) {
     return dispatch => {
         dispatch({ type: Constants.SIGNUP_USER_REQUEST });
 
-        POST(Constants.SIGNUP_API, credentials)
+        return POST(Constants.SIGNUP_API, credentials)
             .then(() => {
-                dispatch({ type: Constants.SIGNUP_USER_SUCCESS });
+                return dispatch({ type: Constants.SIGNUP_USER_SUCCESS });
             })
             .catch((error) => {
-                dispatch({
+                return dispatch({
                     type: Constants.SIGNUP_USER_FAILURE,
                     error,
                 });
@@ -83,10 +83,10 @@ export function activateUser() {
 
         GET(Constants.ACTIVATE_API)
             .then(() => {
-                dispatch({ type: Constants.ACTIVATE_USER_SUCCESS });
+                return dispatch({ type: Constants.ACTIVATE_USER_SUCCESS });
             })
             .catch((error) => {
-                dispatch({
+                return dispatch({
                     type: Constants.ACTIVATE_USER_FAILURE,
                     error,
                 });

@@ -19,15 +19,6 @@ module.exports = new Configurator().merge({
         libraryTarget: "commonjs2",
     },
 
-    plugins: [
-        new webpack.DefinePlugin({
-            __ENV__: JSON.stringify(process.env.NODE_ENV),
-            __HOSTNAME__: JSON.stringify(process.env.HOSTNAME),
-            __PORT__: JSON.stringify(process.env.PORT),
-            __CLIENT__: false,
-        }),
-    ],
-
     module: {
         loaders: [
             {

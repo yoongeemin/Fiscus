@@ -1,6 +1,6 @@
 module.exports = {
     domain: `${process.env.HOSTNAME}:${process.env.PORT}`,
-    db: "mongodb://localhost/fiscus",
+    db: "mongodb://www.localhost.com/fiscus",
     viewCache: false,
     facebook: {
         clientID: process.env.FACEBOOK_CLIENTID,

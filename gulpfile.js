@@ -7,15 +7,15 @@ gulp.task("clean", tasks.clean);
 
 
 // Set environment variables
-gulp.task("env:dev", tasks.env("DEV", "http://localhost", 8080));
-gulp.task("env:prod", tasks.env("PROD", "http://localhost", 8080));
+gulp.task("env:dev", tasks.env("DEV", "http://www.localhost.com", 8080));
+gulp.task("env:prod", tasks.env("PROD", "http://www.localhost.com", 8080));
 
 
 // Build
-gulp.task("build:app:dev", tasks.build(require("./webpack/app/app.dev")));
-gulp.task("build:app:prod", tasks.build(require("./webpack/app/app.prod")));
-gulp.task("build:server:dev", tasks.build(require("./webpack/server/server.dev")));
-gulp.task("build:server:prod", tasks.build(require("./webpack/server/server.prod")));
+gulp.task("build:app:dev", tasks.build(require("./webpack/app/app.dev.js")));
+gulp.task("build:app:prod", tasks.build(require("./webpack/app/app.prod.js")));
+gulp.task("build:server:dev", tasks.build(require("./webpack/server/server.dev.js")));
+gulp.task("build:server:prod", tasks.build(require("./webpack/server/server.prod.js")));
 
 
 // Lint
@@ -40,8 +40,14 @@ gulp.task("lint", ["lint:server", "lint:app"], (done) => { done(); });
 
 
 // Run
-gulp.task("dev", ["env:dev", "clean", "lint", "build:server:dev"], tasks.nodemon(
+gulp.task("dev", ["clean", "lint", "env:dev", "build:server:dev"], tasks.nodemon(
     path.resolve(__dirname, "server", "server.js"),
     [path.resolve(__dirname, "server", "**")],
     "js hjs"
 ));
+//// Run
+//gulp.task("dev", ["clean", "lint", "env:dev"], tasks.nodemon(
+//    path.resolve(__dirname, "server", "server.js"),
+//    [path.resolve(__dirname, "server", "**")],
+//    "js hjs"
+//));

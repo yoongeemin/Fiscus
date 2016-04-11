@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import { routerReducer as routing } from "react-router-redux";
+import { combineReducers } from "redux-immutable";
 import userReducer from "./userReducer";
 import quoteReducer from "./quoteReducer";
+import routeReducer from "./routeReducer";
 
 export default combineReducers({
-	userReducer,
-	quoteReducer,
-	routing,
+    userReducer,
+    quoteReducer,
+    routeReducer,
 });
