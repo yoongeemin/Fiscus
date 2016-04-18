@@ -11,7 +11,6 @@ const MongoStore = require("koa-generic-session-mongo");
 const csrf = require("koa-csrf");
 const cors = require("koa-cors");
 const views = require("co-views");
-const config = require("./config");
 
 // Bootstrap models
 require("../models/index");
@@ -22,25 +21,25 @@ module.exports = (app, passport) => {
     app.use(bodyParser());
     app.use(cors());
 
-    app.use(favicon(path.resolve(config.root, "public/img/favicon.png")));
-    app.use(serve(path.resolve(config.root, "public")));
+    app.use(favicon(path.resolve(__dirname, "../../public/img/favicon.png")));
+    app.use(serve(path.resolve(__dirname, "../../public")));
     app.use(function* (next) {
         this.render = views(path.resolve(__dirname, "..", "views"), {
             map: { hjs: "hogan" },
-            cache: config.viewCache,
+            cache: (process.env.NODE_ENV !== "DEV"),
         });
         yield next;
     });
 
     app.proxy = true;
-    app.keys = config.sessionSecret;
+    app.keys = [process.env.SESSION_SECRET];
     app.use(session({
         cookie: {
             httpOnly: true,
             signed: true,
         },
         store: new MongoStore({
-            url: config.db,
+            url: process.env.DB,
         }),
     }));
 

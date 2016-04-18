@@ -7,8 +7,8 @@ gulp.task("clean", tasks.clean);
 
 
 // Set environment variables
-gulp.task("env:dev", tasks.env("DEV", "http://www.localhost.com", 8080));
-gulp.task("env:prod", tasks.env("PROD", "http://www.localhost.com", 8080));
+gulp.task("env:dev", tasks.env(path.resolve(__dirname, "env", "dev.json")));
+gulp.task("env:prod", tasks.env(path.resolve(__dirname, "env", "prod.json")));
 
 
 // Build
@@ -40,14 +40,9 @@ gulp.task("lint", ["lint:server", "lint:app"], (done) => { done(); });
 
 
 // Run
-gulp.task("dev", ["clean", "lint", "env:dev", "build:server:dev"], tasks.nodemon(
+gulp.task("dev", ["clean", "lint", "build:server:dev"], tasks.nodemon(
+    require("./env/dev.json"),
     path.resolve(__dirname, "server", "server.js"),
     [path.resolve(__dirname, "server", "**")],
     "js hjs"
 ));
-//// Run
-//gulp.task("dev", ["clean", "lint", "env:dev"], tasks.nodemon(
-//    path.resolve(__dirname, "server", "server.js"),
-//    [path.resolve(__dirname, "server", "**")],
-//    "js hjs"
-//));

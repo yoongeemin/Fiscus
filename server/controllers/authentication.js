@@ -1,21 +1,10 @@
 "use strict";
 const passport = require("koa-passport");
-const config = require("../config/config");
 const User = require("../models/user");
 const crypt = require("../lib/promises/crypt");
 const mailer = require("../lib/promises/mailer");
 
 const TOKEN_SIZE = 32;
-
-function* authenticate() {
-    const x = this.cookies.toString();
-    const jwt = this.cookies.get("fiscusJwt", { signed: true });
-    if (!jwt) { this.throw("Not authenticated"); }
-    else {
-        this.body = yield crypt.verifyJwt(jwt);
-        this.status = 200;
-    }
-}
 
 function* signIn() {
     const _this = this;
@@ -32,10 +21,13 @@ function* signIn() {
                 preference: user.preference,
             };
 
-            _this.cookies.set("fiscusJwt", yield crypt.genJwt(user), {
+            const jwtExpir = 1 * 24 * 60 * 60 * 1000; // 1 day
+            _this.cookies.set("jwt", yield crypt.genJwt(user), {
                 httpOnly: true,
-                signed: true,
+                signed: false,
+                expires: new Date(Date.now() + jwtExpir),
             });
+
             _this.body = user;
             _this.status = 200;
         }
@@ -45,7 +37,7 @@ function* signIn() {
 function* signOut() {
     this.logout();
     this.session = null;
-    const name = "fiscusJwt";
+    const name = "jwt";
     const opts = {
         expires: new Date(1),
         path: "/",
@@ -79,7 +71,7 @@ function* signUp() {
         user = yield user.save();
 
         const context = {
-            domain: config.domain,
+            domain: `${process.env.HOSTNAME}:${process.env.PORT}`,
             uid: user.id,
             token,
         };
@@ -87,10 +79,10 @@ function* signUp() {
         const SUBJECT = "Activate Your Fiscus Account";
         const HTML = yield this.render("activate.email.hjs", context);
         yield mailer.sendEmail(
-            config.smtpServer,
-            config.smtpPort,
-            config.smtpUser,
-            config.smtpPassword,
+            process.env.SMTP_SERVER,
+            process.env.SMTP_PORT,
+            process.env.SMTP_USER,
+            process.env.SMTP_PASSWORD,
             user.email,
             SUBJECT,
             HTML
@@ -129,7 +121,6 @@ function* activate() {
 }
 
 module.exports = {
-    authenticate,
     signIn,
     signOut,
     signUp,

@@ -13,7 +13,7 @@ export const DEV  = "DEV";
 export const QA   = "QA";
 export const PROD = "PROD";
 
-const API                            = `${__HOSTNAME__}:${__PORT__}/api`;
+const API                            = `${process.env.HOSTNAME}:${process.env.PORT}/api`;
 export const AUTHENTICATE_API        = `${API}/authenticate/`;
 export const SIGNIN_API              = `${API}/signin/`;
 export const SIGNOUT_API             = `${API}/signout/`;

@@ -1,0 +1,57 @@
+{"level":"error","message":"Failed to connect to mongodb server: mongodb://www.localhost.com/fiscus","timestamp":"2016-04-16T14:52:45.416Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T20:46:00.539Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T20:49:17.487Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T20:49:55.703Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T21:58:04.124Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:00:47.335Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:05:42.207Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:05:51.492Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:06:02.834Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:14:32.215Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:11.508Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:26.412Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:29.258Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:34.492Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:37.668Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:41.742Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:15:50.403Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:16:09.715Z"}
+{"level":"error","message":"Failed to connect to mongodb server: undefined","timestamp":"2016-04-16T22:17:25.488Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:20:14.498Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:21:10.664Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:22:41.425Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:23:30.752Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:24:23.627Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:58:21.069Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T22:59:55.012Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:00:29.169Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:02:51.768Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:03:25.455Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:04:56.719Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:06:05.881Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:06:51.039Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:07:44.087Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:08:33.265Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-16T23:10:23.505Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T00:36:15.807Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:25:20.017Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:25:52.036Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:27:32.325Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:29:46.860Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:34:07.023Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:41:44.443Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T02:42:41.239Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:05:06.795Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:06:14.617Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:08:48.120Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:10:22.679Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:12:02.027Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:12:49.767Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:31:50.130Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:32:27.184Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:33:05.523Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:33:28.499Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:42:09.555Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:42:52.401Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:43:53.357Z"}
+{"level":"info","message":"Server starting on port: 8080","timestamp":"2016-04-17T03:52:43.920Z"}

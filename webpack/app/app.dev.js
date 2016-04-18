@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const Configurator = require("webpack-config");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const AssetsPlugin = require("assets-webpack-plugin");
-const Constants = require("../constants/const.dev");
 
 module.exports = new Configurator()
 .extend(path.resolve(__dirname, "app.base"))
@@ -34,9 +33,6 @@ module.exports = new Configurator()
             path: path.resolve(__dirname, "..", "..", "public"),
             filename: "manifest.json",
         }),
-        new webpack.DefinePlugin(Object.assign({}, Constants.DEFINITION, {
-            __CLIENT__: true,
-        })),
     ],
 
 

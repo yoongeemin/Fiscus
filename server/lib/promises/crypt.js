@@ -2,33 +2,22 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const bluebird = require("bluebird");
 const jwt = require("jsonwebtoken");
-const config = require("../../config/config");
 
 module.exports = {
     genJwt: (user) => {
         return new bluebird((resolve, reject) => {
             jwt.sign(
                 user,
-                config.jwtSecret,
+                process.env.JWT_SECRET,
                 {
-                    expiresIn: config.jwtExpir,
                     issuer: process.env.HOSTNAME,
-                    algorithm: "HS512",
+                    algorithm: process.env.JWT_ALGO,
                 },
                 (token) => {
                     if (token) return resolve(token);
                     return reject(err);
                 }
             );
-        });
-    },
-
-    verifyJwt: (token) => {
-        return new bluebird((resolve, reject) => {
-            jwt.verify(token, config.jwtSecret, (err, decoded) => {
-                if (err) return reject(err);
-                return resolve(decoded);
-            });
         });
     },
 

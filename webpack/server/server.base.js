@@ -19,6 +19,12 @@ module.exports = new Configurator().merge({
         libraryTarget: "commonjs2",
     },
 
+    plugins: [
+        new webpack.DefinePlugin({
+            __CLIENT__: false,
+        }),
+    ],
+
     module: {
         loaders: [
             {

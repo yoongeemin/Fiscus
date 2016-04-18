@@ -1,0 +1,15 @@
+{
+    "NODE_ENV": "DEV",
+    "HOSTNAME": "http://localhost",
+    "PORT": 8080,
+
+    "SMTP_SERVER": "smtp.gmail.com",
+    "SMTP_PORT": 587,
+    "SMTP_USER": "yoongeemin@gmail.com",
+    "SMTP_PASSWORD": "jywzaiwblxbqfvug",
+    "SESSION_SECRET": "this is a csrf secret",
+    "JWT_SECRET": "this is a jwt secret",
+    "JWT_ALGO": "HS512",
+
+    "DB": "mongodb://localhost/fiscus"
+}

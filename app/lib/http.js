@@ -26,9 +26,9 @@ export const POST = (url, data = {}) => {
     return axios.post(url, JSON.stringify(data), {
         headers: {
             "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-Token": $("meta[name='csrf']").attr("content"),
             "Content-Type": "application/json",
         },
-        xsrfCookieName: $("meta[name='csrf']").attr("content"),
         withCredentials: true,
     });
 };

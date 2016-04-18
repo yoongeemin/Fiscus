@@ -4,7 +4,6 @@ const passport = require("passport");
 const bootstrapPassport = require("./config/passport");
 const bootstrapKoa = require("./config/koa");
 const bootstrapRoutes = require("./config/routes");
-const config = require("./config/config");
 const LOGGER = require("./lib/logger");
 
 const app = koa();
@@ -18,12 +17,12 @@ const listen = () => {
 };
 
 const connect = () => {
-    mongoose.connect(config.db);
+    mongoose.connect(process.env.DB);
     return mongoose.connection;
 };
 
 if (!module.parent) {
     connect()
-        .on("error", () => { LOGGER.error(`Failed to connect to mongodb server: ${config.db}`); })
+        .on("error", () => { LOGGER.error(`Failed to connect to mongodb server: ${process.env.DB}`); })
         .on("open", listen);
 }

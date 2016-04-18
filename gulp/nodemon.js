@@ -1,12 +1,12 @@
-const path = require("path");
 const nodemon = require("gulp-nodemon");
 
-module.exports = (script, watch, ext) => {
+module.exports = (env, script, watch, ext) => {
     return () => {
         nodemon({
             script,
             watch,
             ext,
+            env,
         })
         .on("restart", () => {
             console.info("Nodemon restarting server");

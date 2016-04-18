@@ -13,7 +13,6 @@ module.exports = (app) => {
     router.post(`${API_PREFIX}/signin`,              authenticationControllers.signIn);
     router.post(`${API_PREFIX}/signup`,              authenticationControllers.signUp);
     router.get(`${API_PREFIX}/signout`,              authenticationControllers.signOut);
-    router.get(`${API_PREFIX}/authenticate`,         authenticationControllers.authenticate);
     router.get(`${API_PREFIX}/activate/:uid/:token`, authenticationControllers.activate);
 
 	// Application API

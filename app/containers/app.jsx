@@ -14,8 +14,6 @@ class App extends React.Component {
         quotesLoading: React.PropTypes.bool.isRequired,
     };
 
-    static init = [authenticate()];
-
     render() {
         return (
             <div id="app">
