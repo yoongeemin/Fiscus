@@ -16,10 +16,4 @@ module.exports = new Configurator().merge({
             },
         ],
     },
-
-    plugins: [
-        new webpack.DefinePlugin({
-            __CLIENT__: true,
-        }),
-    ],
 });
