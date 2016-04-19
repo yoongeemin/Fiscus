@@ -3,32 +3,12 @@ import classnames from "classnames";
 
 if (__CLIENT__) require("../styles/components/sidebar.scss");
 
-class SideBarSubMenu extends React.Component {
-    static propTypes = {
-        name: React.PropTypes.string,
-        glyphicon: React.PropTypes.string,
-        onSubMenuClick: React.PropTypes.func,
-    };
-
-    render() {
-        return (
-            <li className="sidebar-submenu fill-width">
-                <a href="javascript:void(0);" className="position-relative display-table-cell" onClick={this.props.onSubMenuClick}>
-                    <span className={this.props.glyphicon}></span>
-                    <span className="menu-option-text">{this.props.name}</span>
-                </a>
-            </li>
-        );
-    }
-}
-
-
 class SideBarMenu extends React.Component {
     static propTypes = {
         name: React.PropTypes.string,
         glyphicon: React.PropTypes.string,
         active: React.PropTypes.bool,
-        open: React.PropTypes.bool,
+        initOpen: React.PropTypes.bool,
         subMenus: React.PropTypes.array,
         onMenuActive: React.PropTypes.func,
     };
@@ -36,23 +16,23 @@ class SideBarMenu extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleSubMenuClick = () => {
-            this.props.onMenuActive(this.props.name);
-        };
-
         this.handleMenuClick = () => {
-            if (this.props.open === null) {
-                this.props.onMenuActive(this.props.name);
-            }
-            else {
+            if (this.props.subMenus) {
                 this.setState({ open: !this.state.open });
             }
+            else {
+                this.props.onMenuActive(this.props.name);
+            }
+        };
+
+        this.handleSubMenuClick = () => {
+            this.props.onMenuActive(this.props.name);
+            // Push history
         };
     }
 
     state = {
-        open: this.props.open,
-        active: this.props.active,
+        open: this.props.initOpen,
     };
 
     render() {
@@ -60,18 +40,17 @@ class SideBarMenu extends React.Component {
 
         const subMenuList = (_this.props.subMenus) && _this.props.subMenus.map((subMenu, index) => {
             return (
-                <SideBarSubMenu
-                    key={index}
-                    name={subMenu.name}
-                    glyphicon={subMenu.glyphicon}
-                    onSubMenuClick={_this.handleSubMenuClick}
-                />
+                <li key={index} className="sidebar-submenu fill-width">
+                    <a href="javascript:void(0);" className="position-relative display-table-cell" onClick={_this.handleSubMenuClick}>
+                        <span className={subMenu.glyphicon}></span>
+                        <span className="menu-option-text">{subMenu.name}</span>
+                    </a>
+                </li>
             );
         });
 
         const subMenuClass = (_this.state.open) ? "open" : "closed";
         const menuClass = classnames("sidebar-menu", { "active": _this.state.active });
-
         return (
             <div className={menuClass}>
                 <a href="javascript:void(0);" onClick={_this.handleMenuClick}>
@@ -101,10 +80,10 @@ export default class SideBar extends React.Component {
             return (
                 <SideBarMenu
                     key={index}
-                    glyphicon={menu.glyphicon}
                     name={menu.name}
+                    glyphicon={menu.glyphicon}
                     active={_this.state.active === menu.name}
-                    open={menu.open}
+                    initOpen={menu.open}
                     subMenus={menu.subMenus}
                     onMenuActive={(name) => { _this.setState({ active: name }); }}
                 />
