@@ -7,7 +7,7 @@ module.exports = new Configurator()
     .extend(path.resolve(__dirname, "base"))
     .merge({
         debug: false,
-    
+
         plugins: [
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin({

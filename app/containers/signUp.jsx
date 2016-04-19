@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router";
 import { signUp } from "../actions/index";
 
-if (__CLIENT__) require("../styles/components/signUp.scss");
+if (__CLIENT__) require("../styles/components/signup.scss");
 
 class SignUp extends React.Component {
     static propTypes = {

@@ -11,10 +11,10 @@ module.exports = new Configurator()
             path: path.resolve(__dirname, "..", "public", "assets"),
             publicPath: "/assets/",
         },
-    
+
         resolve: {
             extensions: ["", ".js", ".jsx"],
-    
+
             alias: {
                 "bootstrap-css": `${nodePath}/bootstrap/dist/css/bootstrap.min.css`,
                 "bootstrap-theme-css": `${nodePath}/bootstrap/dist/css/bootstrap-theme.min.css`,
@@ -23,7 +23,7 @@ module.exports = new Configurator()
                 "jquery-ui": `${nodePath}/jquery-ui/themes/smoothness/jquery-ui.min.css`,
             },
         },
-    
+
         plugins: [
             new webpack.optimize.OccurenceOrderPlugin(true),
             new webpack.ProvidePlugin({
@@ -31,7 +31,7 @@ module.exports = new Configurator()
                 _: "lodash",
             }),
         ],
-    
+
         module: {
             loaders: [
                 {

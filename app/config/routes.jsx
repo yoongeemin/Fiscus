@@ -1,4 +1,4 @@
-import { App, SignUp } from "../containers/index";
+import { Analyzer, App, Ledger, SignUp } from "../containers/index";
 import { Authentication, Dashboard } from "../components/index";
 
 export default (store) => {
@@ -26,16 +26,16 @@ export default (store) => {
                 path: "/",
                 component: Dashboard,
                 onEnter: authenticate,
-                // childRoutes: [
-                //     {
-                //         path: "ledger",
-                //         component: Ledger,
-                //     },
-                //     {
-                //         path: "analyzer",
-                //         component: Analyzer,
-                //     },
-                // ],
+                 childRoutes: [
+                     {
+                         path: "/ledger",
+                         component: Ledger,
+                     },
+                     {
+                         path: "/analyzer",
+                         component: Analyzer,
+                     },
+                 ],
             },
             {
                 path: "/signin",

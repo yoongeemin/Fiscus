@@ -8,7 +8,7 @@ module.exports = new Configurator()
         eslint: {
             configFile: path.resolve(__dirname, "..", ".eslintrc.react"),
         },
-    
+
         module: {
             preLoaders: [
                 {

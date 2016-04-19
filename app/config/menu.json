@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Profile",
+        "glyphicon": "glyphicon glyphicon-user"
+    },
+    {
+        "name": "Apps",
+        "glyphicon": "glyphicon glyphicon-th",
+        "subMenus": [
+            {
+                "name": "Ledger"
+            },
+            {
+                "name": "Analyzer"
+            },
+            {
+                "name": "Target"
+            },
+            {
+                "name": "Get More Apps",
+                "glyphicon": "glyphicon glyphicon-plus"
+            }
+        ],
+        "open": true
+    },
+    {
+        "name": "Trackers",
+        "glyphicon": "glyphicon glyphicon-signal",
+        "subMenus": [
+            {
+                "name": "FX"
+            },
+            {
+                "name": "Credit"
+            },
+            {
+                "name": "Get More Trackers",
+                "glyphicon": "glyphicon glyphicon-plus"
+            }
+        ],
+        "open": false
+    },
+    {
+        "name": "Settings",
+        "glyphicon": "glyphicon glyphicon-cog"
+    }
+]

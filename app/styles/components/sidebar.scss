@@ -1,0 +1,56 @@
+@import '../constants';
+
+#sidebar {
+    background-color: $col-gray-4;
+    z-index: 999;
+    padding-top: 100px;
+    width: 15%;
+    padding-left: 20px;
+    position: relative;
+
+    ul {
+        overflow: hidden;
+        -webkit-transition: max-height 0.2s ease-in-out;
+        -moz-transition: max-height 0.2s ease-in-out;
+        -o-transition: max-height 0.2s ease-in-out;
+        transition: max-height 0.2s ease-in-out;
+    }
+
+    ul.open {
+        max-height: 300px;
+
+    }
+    ul.closed {
+        max-height: 0;
+    }
+
+    .menu-option-text {
+        margin-left: 10px;
+    }
+
+    .sidebar-menu {
+        padding-bottom: 20px;
+
+        .sidebar-submenu {
+            padding-bottom: 15px;
+            padding-left: 19px;
+
+            .glyphicon {
+                position: absolute;
+                left: -15px;
+            }
+        }
+
+        .sidebar-submenu:first-of-type {
+            padding-top: 15px;
+        }
+        .sidebar-submenu:last-of-type {
+            padding-bottom: 20px;
+        }
+    }
+
+
+    .sidebar-menu.active>a>span {
+        color: $col-primary;
+    }
+}
