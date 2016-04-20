@@ -50,7 +50,7 @@ class SideBarMenu extends React.Component {
         });
 
         const subMenuClass = (_this.state.open) ? "open" : "closed";
-        const menuClass = classnames("sidebar-menu", { "active": _this.state.active });
+        const menuClass = classnames("sidebar-menu", { "active": _this.props.active });
         return (
             <div className={menuClass}>
                 <a href="javascript:void(0);" onClick={_this.handleMenuClick}>

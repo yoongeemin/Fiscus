@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { SignIn } from "./index";
 import { Tickers } from "../components/index";
 import { signOut } from "../actions/index";
-import { getQuotes } from "../actions/index";
 
 if (__CLIENT__) require("../styles/components/navbar.scss");
 
@@ -17,13 +16,6 @@ class NavBar extends React.Component {
         quotesLoading: React.PropTypes.bool.isRequired,
     };
 
-    constructor(props) {
-        super(props);
-        const { dispatch } = this.props;
-
-        this.handleSignout = () => { dispatch(signOut()); };
-    }
-
     render() {
         const { user, userLoading, quotes } = this.props;
 
@@ -33,7 +25,7 @@ class NavBar extends React.Component {
                 <div id="navbar-main">
                     <a href="javascript:void(0);">FISCUS</a>
                     { authenticated
-                        ? <a onClick={this.handleSignout} href="javascript:void(0);">Sign Out</a>
+                        ? <a onClick={() => { this.props.dispatch(signOut()); }} href="javascript:void(0);">Sign Out</a>
                         : (!userLoading && <SignIn />)
                     }
                 </div>

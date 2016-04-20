@@ -2,7 +2,6 @@ import React from "react";
 import Immutable from "immutable";
 import { connect } from "react-redux";
 import NavBar from "./navbar";
-import { authenticate } from "../actions/index";
 
 class App extends React.Component {
     static propTypes = {

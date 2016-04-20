@@ -1,27 +1,8 @@
+import bluebird from "bluebird";
+import { push } from "react-router-redux";
 import { GET, POST } from "../lib/http";
 import * as Constants from "../lib/constants";
 import { getQuotes } from "./index";
-
-export function authenticate() {
-    return dispatch => {
-        dispatch({ type: Constants.AUTHENTICATE_REQUEST });
-
-        return GET(Constants.AUTHENTICATE_API)
-            .then((response) => {
-                return dispatch({
-                    type: Constants.AUTHENTICATE_SUCCESS,
-                    data: response.data,
-                });
-                //dispatch(getQuotes());
-            })
-            .catch((error) => {
-                return dispatch({
-                    type: Constants.AUTHENTICATE_FAILURE,
-                    error,
-                });
-            });
-    };
-}
 
 export function signIn(credentials) {
     return dispatch => {
@@ -33,6 +14,14 @@ export function signIn(credentials) {
                     type: Constants.SIGNIN_USER_SUCCESS,
                     data: response.data,
                 });
+
+                //return bluebird.all([
+                //    dispatch(push({ pathname: "/" })),
+                //    dispatch({
+                //        type: Constants.SIGNIN_USER_SUCCESS,
+                //        data: response.data,
+                //    }),
+                //]);
             })
             .catch((error) => {
                 return dispatch({

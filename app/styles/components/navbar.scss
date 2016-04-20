@@ -1,7 +1,8 @@
-@import '../constants';
+@import "../constants";
 
 #navbar {
     #navbar-main {
+        z-index: 1000;
         background-color: $col-primary;
         height: $navbar-height;
         padding: 8px;

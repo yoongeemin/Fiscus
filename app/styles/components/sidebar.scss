@@ -1,4 +1,5 @@
-@import '../constants';
+@import "../constants";
+@import "../mixins";
 
 #sidebar {
     background-color: $col-gray-4;
@@ -10,10 +11,7 @@
 
     ul {
         overflow: hidden;
-        -webkit-transition: max-height 0.2s ease-in-out;
-        -moz-transition: max-height 0.2s ease-in-out;
-        -o-transition: max-height 0.2s ease-in-out;
-        transition: max-height 0.2s ease-in-out;
+        @include transition(max-height, 0.2s, ease-in-out);
     }
 
     ul.open {
@@ -48,7 +46,6 @@
             padding-bottom: 20px;
         }
     }
-
 
     .sidebar-menu.active>a {
         color: $col-primary;
