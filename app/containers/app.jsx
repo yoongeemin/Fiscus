@@ -2,6 +2,14 @@ import React from "react";
 import Immutable from "immutable";
 import { connect } from "react-redux";
 import NavBar from "./navbar";
+import { getQuotes } from "../actions/index";
+
+if (__CLIENT__) {
+    require("jquery");
+    require("jquery-ui");
+    require("bootstrap-js");
+    require("../lib/vendor/vticker");
+}
 
 class App extends React.Component {
     static propTypes = {
@@ -12,6 +20,8 @@ class App extends React.Component {
         quotes: React.PropTypes.instanceOf(Immutable.List).isRequired,
         quotesLoading: React.PropTypes.bool.isRequired,
     };
+
+    static init = [getQuotes()];
 
     render() {
         return (

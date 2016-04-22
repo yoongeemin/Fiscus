@@ -9,7 +9,7 @@ export function getQuotes() {
             .then((response) => {
                 return dispatch({
                     type: Constants.GET_QUOTES_SUCCESS,
-                    data: response,
+                    data: response.data,
                 });
             })
             .catch((error) => {

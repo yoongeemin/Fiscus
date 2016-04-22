@@ -4,7 +4,6 @@ import { Authentication, Dashboard } from "../components/index";
 export default (store) => {
     const authenticate = (nextState, replace, callback) => {
         const signedIn = !store.getState().get("userReducer").get("user").isEmpty();
-        console.log(signedIn);
         if (!signedIn) {
             replace({
                 pathname: "/signin",
@@ -41,12 +40,12 @@ export default (store) => {
             {
                 path: "/signin",
                 component: Authentication,
-                //onEnter: redirect,
+                onEnter: redirect,
             },
             {
                 path: "/signup",
                 component: SignUp,
-                //onEnter: redirect,
+                onEnter: redirect,
             },
         ],
     };

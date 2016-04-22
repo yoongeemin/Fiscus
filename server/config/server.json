@@ -1,0 +1,32 @@
+{
+    "yahoo": {
+        "url": "http://finance.yahoo.com/webservice/v1/symbols",
+        "tickers": [
+            { "name": "DJIA", "symbol": "INDU" },
+            { "name": "S&P500", "symbol": "^GSPC" },
+            { "name": "NASDAQ", "symbol": "^COMP" },
+            { "name": "STOXX", "symbol": "^STOXX50E" },
+            { "name": "NIKKEI", "symbol": "^N225" },
+            { "name": "SSE", "symbol": "^SSEC" },
+            { "name": "USD/EUR", "symbol": "EUR=X" },
+            { "name": "USD/JPY", "symbol": "JPY=X" },
+            { "name": "USD/GBP", "symbol": "GBP=X" },
+            { "name": "USD/AUD", "symbol": "AUD=X" },
+            { "name": "USD/CHF", "symbol": "CHF=X" },
+            { "name": "USD/CAD", "symbol": "CAD=X" },
+            { "name": "USD/SEK", "symbol": "SEK=X" },
+            { "name": "NZD", "symbol": "NZD=X" },
+            { "name": "US 10-Year", "symbol": "^TNX" },
+            { "name": "Crude Oil", "symbol": "CLF16.NYM" },
+            { "name": "Natural Gas", "symbol": "NGF16.NYM" },
+            { "name": "Gold", "symbol": "GCG16.CMX" },
+            { "name": "Silver", "symbol": "SIH16.CMX" },
+            { "name": "Corn", "symbol": "CH16.CBT" },
+            { "name": "Bit", "symbol": "BTCUSD=X" }
+        ],
+        "options": {
+            "format": "json",
+            "view": "detail"
+        }
+    }
+}

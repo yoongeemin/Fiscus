@@ -10,18 +10,13 @@ export function signIn(credentials) {
 
         return POST(Constants.SIGNIN_API, credentials)
             .then((response) => {
-                return dispatch({
-                    type: Constants.SIGNIN_USER_SUCCESS,
-                    data: response.data,
-                });
-
-                //return bluebird.all([
-                //    dispatch(push({ pathname: "/" })),
-                //    dispatch({
-                //        type: Constants.SIGNIN_USER_SUCCESS,
-                //        data: response.data,
-                //    }),
-                //]);
+                return bluebird.all([
+                    dispatch({
+                        type: Constants.SIGNIN_USER_SUCCESS,
+                        data: response.data,
+                    }),
+                    dispatch(push({ pathname: "/" })),
+                ]);
             })
             .catch((error) => {
                 return dispatch({
@@ -38,7 +33,10 @@ export function signOut() {
 
         return GET(Constants.SIGNOUT_API)
             .then(() => {
-                return dispatch({ type: Constants.SIGNOUT_USER_SUCCESS });
+                return bluebird.all([
+                    dispatch({ type: Constants.SIGNOUT_USER_SUCCESS }),
+                    dispatch(push({ pathname: "/signin" })),
+                ]);
             })
             .catch((error) => {
                 return dispatch({

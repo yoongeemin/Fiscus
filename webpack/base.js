@@ -27,6 +27,7 @@ module.exports = new Configurator()
         plugins: [
             new webpack.optimize.OccurenceOrderPlugin(true),
             new webpack.ProvidePlugin({
+                jQuery: "jquery",
                 $: "jquery",
                 _: "lodash",
             }),

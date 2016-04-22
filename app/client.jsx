@@ -17,21 +17,6 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 const routes = configureRoutes(store);
 
-//const { pathname, search, hash } = window.location;
-//const location = `${pathname}${search}${hash}`;
-//
-//match({ routes, location }, (err, redirect, props) => {
-//    ReactDOM.render(
-//        (
-//            <Provider store={store}>
-//                <Router {...props} history={history} routes={routes} />
-//            </Provider>
-//        ),
-//        document.getElementById("main")
-//    );
-//});
-
-
 ReactDOM.render(
     (
         <Provider store={store}>

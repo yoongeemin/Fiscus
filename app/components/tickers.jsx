@@ -1,16 +1,19 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import Immutable from "immutable";
 import classnames from "classnames";
+//import "../lib/vendor/vticker";
 
 export default class Ticker extends React.Component {
     static propTypes = {
         quotes: React.PropTypes.instanceOf(Immutable.List).isRequired,
     };
+
     componentDidMount() {
-        //const options = {
-        //    height: 32,
-        //    padding: 6
-        //};
+        const options = {
+            height: 32,
+            padding: 6
+        };
         //$(ReactDOM.findDOMNode(this)).vTicker(options);
     }
 

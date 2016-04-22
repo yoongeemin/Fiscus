@@ -66,13 +66,16 @@ export function* render() {
             if (redirect) { _this.redirect(`${redirect.pathname}${redirect.search}`); }
             else if (props) {
                 let promises = [getAssets(process.env.NODE_ENV)];
-                promises = promises.concat(props.components.reduce((prev, current) => {
-                    return prev.concat(
-                        (current.WrappedComponent && current.WrappedComponent.init)
-                            ? (current.WrappedComponent.init.map((action) => { return store.dispatch(action); }) || [])
-                            : []
-                    );
-                }, []));
+
+                if (token) {
+                    promises = promises.concat(props.components.reduce((prev, current) => {
+                        return prev.concat(
+                            (current.WrappedComponent && current.WrappedComponent.init)
+                                ? (current.WrappedComponent.init.map((action) => { return store.dispatch(action); }) || [])
+                                : []
+                        );
+                    }, []));
+                }
 
                 return bluebird.all(promises)
                     .then((response) => {
